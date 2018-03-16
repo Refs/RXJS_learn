@@ -18,8 +18,12 @@ touch webpack.config.js
 
 ```
 
+![](./images/rxjs_env.png)
+
 
 ```json
+
+// following cousers have to install specific release of libraries;
 {
   "name": "babel_webpack_starter",
   "version": "1.0.0",
@@ -27,7 +31,7 @@ touch webpack.config.js
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    // use npm build to build our peoject
+    // use `npm run build` to build our peoject
     "build": "webpack"
   },
   "author": "",
@@ -36,9 +40,51 @@ touch webpack.config.js
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^4.1.1",
-    "webpack-dev-server": "^3.1.1"
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.5"
   }
 }
+
+```
+
+```js
+// webpack.config.json
+
+
+const path = require('path');
+
+module.exports = {
+    entry: {
+        app: './src/app/js'
+    },
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: 'app.bundle.js'
+    },
+    module: {
+        loaders: [{
+            test: /\.js?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+                preset: ['env']
+            }
+        }]
+    }
+}
+
+```
+
+> test this config
+
+```bash
+mkdir src
+cd src
+touch app.js
+
++ src
+| + app.js
+
+vi app.js
 
 ```
