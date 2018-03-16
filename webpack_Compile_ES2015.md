@@ -18,7 +18,7 @@ touch webpack.config.js
 
 ```
 
-![](./images/rxjs_env.png)
+![](./images/rxjs_env.png) 跟课的时候，一定要跟着版本走，才不去去犯各种各样的错误；
 
 
 ```json
@@ -47,6 +47,12 @@ touch webpack.config.js
 
 ```
 
+```bash
+# 用来显示 编译报错原因
+webpack --display-error-details`
+
+```
+
 ```js
 // webpack.config.json
 
@@ -55,7 +61,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/app/js'
+        app: './src/app.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -67,7 +73,7 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
-                preset: ['env']
+                presets: ['env']
             }
         }]
     }

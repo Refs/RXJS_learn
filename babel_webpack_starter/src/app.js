@@ -1,3 +1,3 @@
-let a = ()=>{
-	console.log(1234);
+let test = () => {
+	console.log(11);
 }

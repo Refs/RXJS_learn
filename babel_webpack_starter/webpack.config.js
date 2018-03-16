@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/app/js'
+        app: './src/app.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -15,7 +15,7 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
-                preset: ['env']
+                presets: ['env']
             }
         }]
     }
