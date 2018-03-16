@@ -1,0 +1,2328 @@
+﻿1
+00:00:06,950 --> 00:00:09,120
+hey what's going on guys so in this
+
+2
+00:00:09,120 --> 00:00:11,070
+video we're gonna create a development
+
+3
+00:00:11,070 --> 00:00:14,730
+workflow to compile the latest features
+
+4
+00:00:14,730 --> 00:00:17,970
+of JavaScript or equi script down to
+
+5
+00:00:17,970 --> 00:00:21,060
+browser runnable code so basically es5
+
+6
+00:00:21,060 --> 00:00:23,039
+which is the the version of javascript
+
+7
+00:00:23,039 --> 00:00:25,109
+that has been around forever and works
+
+8
+00:00:25,109 --> 00:00:27,960
+in all browsers alright so this is not
+
+9
+00:00:27,960 --> 00:00:31,320
+just to compile es6 or he is 2015 but
+
+10
+00:00:31,320 --> 00:00:36,149
+also es 2016 and es 2017 ok so even
+
+11
+00:00:36,149 --> 00:00:38,430
+features like a sink of weight we're
+
+12
+00:00:38,430 --> 00:00:40,710
+gonna be able to compile those down and
+
+13
+00:00:40,710 --> 00:00:42,960
+we're gonna do that by using webpack
+
+14
+00:00:42,960 --> 00:00:45,180
+along with babel and a couple of
+
+15
+00:00:45,180 --> 00:00:47,700
+different presets not only that but i'm
+
+16
+00:00:47,700 --> 00:00:49,530
+also going to show you how to set up web
+
+17
+00:00:49,530 --> 00:00:52,039
+pack dev server so that you can have a
+
+18
+00:00:52,039 --> 00:00:54,690
+server environment that you can work in
+
+19
+00:00:54,690 --> 00:00:56,789
+so you don't have to keep compiling down
+
+20
+00:00:56,789 --> 00:00:59,190
+loading your application and so on it'll
+
+21
+00:00:59,190 --> 00:01:00,750
+just constantly load in the browser
+
+22
+00:01:00,750 --> 00:01:03,359
+every time you save your file alright so
+
+23
+00:01:03,359 --> 00:01:04,710
+you're gonna learn quite a bit in this
+
+24
+00:01:04,710 --> 00:01:06,930
+video when it comes to web pack and
+
+25
+00:01:06,930 --> 00:01:09,990
+babble okay so let's get started this
+
+26
+00:01:09,990 --> 00:01:12,330
+video is sponsored by GPD host they
+
+27
+00:01:12,330 --> 00:01:14,280
+offer a variety of affordable hosting
+
+28
+00:01:14,280 --> 00:01:16,590
+plans with flexible billing cycles these
+
+29
+00:01:16,590 --> 00:01:18,840
+plans include a free ssl certificate a
+
+30
+00:01:18,840 --> 00:01:21,360
+free domain name website builder and
+
+31
+00:01:21,360 --> 00:01:23,250
+many other services including free
+
+32
+00:01:23,250 --> 00:01:25,770
+website migration with no downtime to
+
+33
+00:01:25,770 --> 00:01:28,560
+find out more visit GPD host com or
+
+34
+00:01:28,560 --> 00:01:30,170
+click the link in the description below
+
+35
+00:01:30,170 --> 00:01:33,329
+alright guys so very quick intro on web
+
+36
+00:01:33,329 --> 00:01:35,070
+pack I do have a crash course on my
+
+37
+00:01:35,070 --> 00:01:37,350
+channel if you're interested in that but
+
+38
+00:01:37,350 --> 00:01:39,509
+basically it's used to take modules with
+
+39
+00:01:39,509 --> 00:01:42,750
+dependencies and generate static assets
+
+40
+00:01:42,750 --> 00:01:44,790
+from them okay that way we can build
+
+41
+00:01:44,790 --> 00:01:47,549
+stuff with modules either custom that we
+
+42
+00:01:47,549 --> 00:01:50,310
+build ourselves or stuff that we install
+
+43
+00:01:50,310 --> 00:01:53,040
+from NPM and we can compile it down to
+
+44
+00:01:53,040 --> 00:01:54,659
+code that can run in the browser
+
+45
+00:01:54,659 --> 00:01:57,090
+alright so web pack is an amazing
+
+46
+00:01:57,090 --> 00:01:59,729
+technology it's what runs behind things
+
+47
+00:01:59,729 --> 00:02:02,340
+like the angular CLI the create react
+
+48
+00:02:02,340 --> 00:02:05,130
+app CLI it compiles everything from
+
+49
+00:02:05,130 --> 00:02:07,740
+those frameworks and its dependencies
+
+50
+00:02:07,740 --> 00:02:10,140
+down to static assets that can run in
+
+51
+00:02:10,140 --> 00:02:12,569
+the browser okay so it allows us to have
+
+52
+00:02:12,569 --> 00:02:13,740
+really intricate
+
+53
+00:02:13,740 --> 00:02:15,780
+and frameworks that can run without a
+
+54
+00:02:15,780 --> 00:02:18,960
+back-end server web pack uses presets
+
+55
+00:02:18,960 --> 00:02:21,510
+that can add extra functionality for
+
+56
+00:02:21,510 --> 00:02:23,430
+example there's a react preset to
+
+57
+00:02:23,430 --> 00:02:24,870
+compile react code
+
+58
+00:02:24,870 --> 00:02:27,150
+there's also presets for babbles such as
+
+59
+00:02:27,150 --> 00:02:31,710
+es 2015 2016 2017 but we're going to use
+
+60
+00:02:31,710 --> 00:02:36,300
+is a preset called babel n for env and
+
+61
+00:02:36,300 --> 00:02:39,210
+I'll get into that in a few minutes but
+
+62
+00:02:39,210 --> 00:02:42,090
+that's the gist of what web pack is all
+
+63
+00:02:42,090 --> 00:02:45,290
+right so now on to babble babble is a
+
+64
+00:02:45,290 --> 00:02:48,750
+compiler that will take features from
+
+65
+00:02:48,750 --> 00:02:51,720
+the latest versions of JavaScript or
+
+66
+00:02:51,720 --> 00:02:54,770
+echo script and bring them down to es 5
+
+67
+00:02:54,770 --> 00:02:57,960
+so real quick if we go up to try it out
+
+68
+00:02:57,960 --> 00:03:02,280
+then this is babble jst o / repple or
+
+69
+00:03:02,280 --> 00:03:06,570
+repl now here what we can do is put es6
+
+70
+00:03:06,570 --> 00:03:09,990
++ code here and it'll get compiled over
+
+71
+00:03:09,990 --> 00:03:12,960
+here to es 5 so you can actually see the
+
+72
+00:03:12,960 --> 00:03:15,090
+conversion and what that looks like so
+
+73
+00:03:15,090 --> 00:03:17,520
+for instance if we were to use let which
+
+74
+00:03:17,520 --> 00:03:20,010
+is a way of declaring a block scope
+
+75
+00:03:20,010 --> 00:03:23,100
+variable and this is this is part of es6
+
+76
+00:03:23,100 --> 00:03:24,500
+or es2015
+
+77
+00:03:24,500 --> 00:03:27,960
+not available in es5 if we were to
+
+78
+00:03:27,960 --> 00:03:30,000
+create a variable here and just set it
+
+79
+00:03:30,000 --> 00:03:33,030
+and set it to 1 2 3 on this side you'll
+
+80
+00:03:33,030 --> 00:03:35,850
+see the es 5 version of this which uses
+
+81
+00:03:35,850 --> 00:03:38,760
+VAR kvar has been around since the
+
+82
+00:03:38,760 --> 00:03:41,820
+beginning of javascript it's let is not
+
+83
+00:03:41,820 --> 00:03:44,340
+part of es 5 so that's why it's being
+
+84
+00:03:44,340 --> 00:03:46,740
+converted alright now if we want to use
+
+85
+00:03:46,740 --> 00:03:49,140
+like an arrow function here so if we
+
+86
+00:03:49,140 --> 00:03:53,130
+want to go the console dot log and just
+
+87
+00:03:53,130 --> 00:03:55,860
+say 1 2 3 on this side you'll see not
+
+88
+00:03:55,860 --> 00:03:57,780
+only did it change let to var but it
+
+89
+00:03:57,780 --> 00:04:00,150
+also changed the arrow function to just
+
+90
+00:04:00,150 --> 00:04:02,550
+a standard function here that returns
+
+91
+00:04:02,550 --> 00:04:06,780
+the console log now when we set up web
+
+92
+00:04:06,780 --> 00:04:08,670
+pack with babel we're going to need to
+
+93
+00:04:08,670 --> 00:04:11,580
+use a preset okay and presets are
+
+94
+00:04:11,580 --> 00:04:15,180
+basically plugins and they have plugins
+
+95
+00:04:15,180 --> 00:04:17,730
+or presets for es 2015 which will
+
+96
+00:04:17,730 --> 00:04:22,740
+compile down es 2015 or es6 yes 2016
+
+97
+00:04:22,740 --> 00:04:25,590
+2017 and then they had this one called
+
+98
+00:04:25,590 --> 00:04:27,790
+latest which basically
+
+99
+00:04:27,790 --> 00:04:30,190
+all three of these together so that you
+
+100
+00:04:30,190 --> 00:04:32,680
+could compile down anything from any of
+
+101
+00:04:32,680 --> 00:04:34,960
+these but that's been deprecated in
+
+102
+00:04:34,960 --> 00:04:37,540
+favor of n for E and V which is this
+
+103
+00:04:37,540 --> 00:04:38,230
+right here
+
+104
+00:04:38,230 --> 00:04:40,930
+so this is what we'll be using and this
+
+105
+00:04:40,930 --> 00:04:42,460
+is very powerful because you can target
+
+106
+00:04:42,460 --> 00:04:45,220
+certain browsers certain versions you
+
+107
+00:04:45,220 --> 00:04:47,320
+can target certain features that you
+
+108
+00:04:47,320 --> 00:04:49,360
+want to use but we're just going to use
+
+109
+00:04:49,360 --> 00:04:51,750
+just a standard preset no configuration
+
+110
+00:04:51,750 --> 00:04:54,670
+nothing like that but that's what we'll
+
+111
+00:04:54,670 --> 00:04:56,680
+be using all right we're also gonna need
+
+112
+00:04:56,680 --> 00:04:58,780
+to use something called a polyfill which
+
+113
+00:04:58,780 --> 00:05:01,510
+I'll explain later on alright so enough
+
+114
+00:05:01,510 --> 00:05:04,600
+of the babel no pun intended and we're
+
+115
+00:05:04,600 --> 00:05:06,540
+gonna create a new folder here called
+
+116
+00:05:06,540 --> 00:05:11,010
+babel underscore web pack underscore
+
+117
+00:05:11,010 --> 00:05:14,560
+starter all right so we're gonna open
+
+118
+00:05:14,560 --> 00:05:16,930
+this with Visual Studio code or whatever
+
+119
+00:05:16,930 --> 00:05:21,370
+text editor you're using and let's go
+
+120
+00:05:21,370 --> 00:05:23,080
+ahead and open up a terminal now I'm
+
+121
+00:05:23,080 --> 00:05:26,410
+gonna be using my integrated terminal
+
+122
+00:05:26,410 --> 00:05:28,390
+with vs code so if you want to do that
+
+123
+00:05:28,390 --> 00:05:30,400
+you can go to view integrated terminal
+
+124
+00:05:30,400 --> 00:05:32,560
+or you can do control tilde and you can
+
+125
+00:05:32,560 --> 00:05:33,970
+toggle it that way
+
+126
+00:05:33,970 --> 00:05:37,180
+I also have get bash integrated with the
+
+127
+00:05:37,180 --> 00:05:39,730
+terminal so first thing we're gonna do
+
+128
+00:05:39,730 --> 00:05:42,400
+is run NPM in knit because we want a
+
+129
+00:05:42,400 --> 00:05:45,100
+package.json file now if you've never
+
+130
+00:05:45,100 --> 00:05:46,630
+worked with web pack before you're
+
+131
+00:05:46,630 --> 00:05:49,630
+probably wondering saying what are we
+
+132
+00:05:49,630 --> 00:05:51,940
+building a node.js application why are
+
+133
+00:05:51,940 --> 00:05:53,980
+we doing you know building up why are we
+
+134
+00:05:53,980 --> 00:05:57,070
+creating a package.json file well that's
+
+135
+00:05:57,070 --> 00:05:59,890
+what web pack does it allows you to use
+
+136
+00:05:59,890 --> 00:06:04,450
+NPM modules or your own modules and it
+
+137
+00:06:04,450 --> 00:06:07,510
+compiles them down to static assets so
+
+138
+00:06:07,510 --> 00:06:09,550
+that you can run it in the browser you
+
+139
+00:06:09,550 --> 00:06:12,730
+don't need a node server to run to run
+
+140
+00:06:12,730 --> 00:06:15,670
+that's the beauty of web pack so that's
+
+141
+00:06:15,670 --> 00:06:17,170
+what we're gonna do or I'm just gonna
+
+142
+00:06:17,170 --> 00:06:19,900
+create a simple package JSON file
+
+143
+00:06:19,900 --> 00:06:24,850
+real quick and let's open that up okay
+
+144
+00:06:24,850 --> 00:06:27,070
+we need to install a few dependencies
+
+145
+00:06:27,070 --> 00:06:29,650
+here a few modules so let's say npm
+
+146
+00:06:29,650 --> 00:06:31,780
+install and these should all be dev
+
+147
+00:06:31,780 --> 00:06:35,770
+dependencies so we want to do - - save -
+
+148
+00:06:35,770 --> 00:06:38,680
+dev alright we're gonna want to install
+
+149
+00:06:38,680 --> 00:06:41,750
+web pack you also want something
+
+150
+00:06:41,750 --> 00:06:46,460
+webpack - dev - server we want Babel
+
+151
+00:06:46,460 --> 00:06:50,960
+core we want the Babel loader for
+
+152
+00:06:50,960 --> 00:06:55,610
+webpack and we want the env preset so
+
+153
+00:06:55,610 --> 00:07:01,880
+that's babble - preset - env okay I
+
+154
+00:07:01,880 --> 00:07:03,830
+think that's everything for now so let's
+
+155
+00:07:03,830 --> 00:07:09,860
+run that alright so now what we want to
+
+156
+00:07:09,860 --> 00:07:13,220
+do is create a config file for web packs
+
+157
+00:07:13,220 --> 00:07:15,140
+so we're gonna go ahead and say new file
+
+158
+00:07:15,140 --> 00:07:20,300
+and let's call this web pack dot config
+
+159
+00:07:20,300 --> 00:07:23,600
+dot j s okay actually before we do that
+
+160
+00:07:23,600 --> 00:07:25,880
+I just want to add a script in package
+
+161
+00:07:25,880 --> 00:07:29,480
+dot Jason now a lot of tutorials will
+
+162
+00:07:29,480 --> 00:07:31,370
+tell you to actually install web pack
+
+163
+00:07:31,370 --> 00:07:34,340
+globally you do not have to do that what
+
+164
+00:07:34,340 --> 00:07:36,169
+you want to do is create a script here
+
+165
+00:07:36,169 --> 00:07:38,960
+I'm gonna call it build and then just
+
+166
+00:07:38,960 --> 00:07:44,090
+set that to web pack like that all right
+
+167
+00:07:44,090 --> 00:07:46,340
+we're gonna save that and that way when
+
+168
+00:07:46,340 --> 00:07:48,830
+we're ready to compile our java script
+
+169
+00:07:48,830 --> 00:07:51,350
+we can just say npm run build and that
+
+170
+00:07:51,350 --> 00:07:54,620
+will compile it down okay now this
+
+171
+00:07:54,620 --> 00:07:56,750
+config file is is where we're going to
+
+172
+00:07:56,750 --> 00:07:59,720
+define the source folder though the
+
+173
+00:07:59,720 --> 00:08:03,800
+source application the source file that
+
+174
+00:08:03,800 --> 00:08:06,470
+we're going to use and then the output
+
+175
+00:08:06,470 --> 00:08:08,630
+okay where do we want it to output into
+
+176
+00:08:08,630 --> 00:08:11,600
+es5 so first thing I'm gonna do is I'm
+
+177
+00:08:11,600 --> 00:08:13,700
+just gonna bring in a module called path
+
+178
+00:08:13,700 --> 00:08:17,000
+which is actually a core module so we
+
+179
+00:08:17,000 --> 00:08:18,470
+didn't have to install it or anything
+
+180
+00:08:18,470 --> 00:08:20,840
+and if you've used nodejs before you've
+
+181
+00:08:20,840 --> 00:08:24,610
+probably used path it's just for
+
+182
+00:08:24,610 --> 00:08:27,680
+manipulating file paths and things like
+
+183
+00:08:27,680 --> 00:08:30,229
+that so then we're gonna just do module
+
+184
+00:08:30,229 --> 00:08:34,130
+dot exports and set this to an object
+
+185
+00:08:34,130 --> 00:08:36,289
+and then this is where we define our
+
+186
+00:08:36,289 --> 00:08:39,979
+entry point so this is going to be an
+
+187
+00:08:39,979 --> 00:08:42,950
+object and we want to say app and then
+
+188
+00:08:42,950 --> 00:08:46,130
+in here is where we want to we want to
+
+189
+00:08:46,130 --> 00:08:50,410
+tell it which file we want to use to
+
+190
+00:08:50,410 --> 00:08:53,240
+basically be our source file
+
+191
+00:08:53,240 --> 00:08:55,250
+so I want to have us a folder called
+
+192
+00:08:55,250 --> 00:08:58,100
+source or SRC and then a file called app
+
+193
+00:08:58,100 --> 00:09:00,680
+dot J s okay so that's gonna be the
+
+194
+00:09:00,680 --> 00:09:03,980
+entry point to our application now what
+
+195
+00:09:03,980 --> 00:09:05,630
+we want to do is put a comma here we
+
+196
+00:09:05,630 --> 00:09:09,310
+want to put the output okay remember
+
+197
+00:09:09,310 --> 00:09:12,320
+we're having our app j s file which will
+
+198
+00:09:12,320 --> 00:09:15,620
+have es6 es seven you know all that
+
+199
+00:09:15,620 --> 00:09:17,870
+stuff all the new JavaScript features
+
+200
+00:09:17,870 --> 00:09:20,029
+and then it's going to be compiled down
+
+201
+00:09:20,029 --> 00:09:22,910
+to es five and that's where this output
+
+202
+00:09:22,910 --> 00:09:24,589
+is going to be okay so we want to
+
+203
+00:09:24,589 --> 00:09:27,830
+specify path and we're just gonna say
+
+204
+00:09:27,830 --> 00:09:30,680
+path dot resolved we're gonna use that
+
+205
+00:09:30,680 --> 00:09:33,050
+path module and we're gonna define
+
+206
+00:09:33,050 --> 00:09:36,350
+double underscored our name which just
+
+207
+00:09:36,350 --> 00:09:38,420
+means the current directory and then a
+
+208
+00:09:38,420 --> 00:09:40,850
+folder called build okay and you can
+
+209
+00:09:40,850 --> 00:09:42,770
+call this whatever you want I like to
+
+210
+00:09:42,770 --> 00:09:44,330
+call it build some people like to call
+
+211
+00:09:44,330 --> 00:09:45,110
+it dist
+
+212
+00:09:45,110 --> 00:09:48,020
+or output you can call it whatever you
+
+213
+00:09:48,020 --> 00:09:50,240
+want but we're gonna call it filled so
+
+214
+00:09:50,240 --> 00:09:52,430
+that's where I compiled JavaScript will
+
+215
+00:09:52,430 --> 00:09:56,600
+go now it needs a file name as well so
+
+216
+00:09:56,600 --> 00:09:59,870
+since it's going to be the app J s and
+
+217
+00:09:59,870 --> 00:10:02,450
+as well as any modules that we create
+
+218
+00:10:02,450 --> 00:10:05,329
+and we import into a PJs it's basically
+
+219
+00:10:05,329 --> 00:10:08,180
+going to be a bundle of JavaScript so
+
+220
+00:10:08,180 --> 00:10:11,350
+it's often called app or something like
+
+221
+00:10:11,350 --> 00:10:16,310
+app bundle dot GIS or just bundle J s
+
+222
+00:10:16,310 --> 00:10:19,010
+whatever you want to call it is fine but
+
+223
+00:10:19,010 --> 00:10:21,320
+that's what we're gonna call it so the
+
+224
+00:10:21,320 --> 00:10:23,350
+next thing we wanted to fine here is
+
+225
+00:10:23,350 --> 00:10:26,570
+module and this is where we define our
+
+226
+00:10:26,570 --> 00:10:30,170
+loaders so I wanna say loaders and
+
+227
+00:10:30,170 --> 00:10:32,360
+remember we installed that Babel loader
+
+228
+00:10:32,360 --> 00:10:34,490
+that's what we're gonna put here so this
+
+229
+00:10:34,490 --> 00:10:36,649
+needs to be an array we're gonna put in
+
+230
+00:10:36,649 --> 00:10:39,500
+an object here now the first thing we're
+
+231
+00:10:39,500 --> 00:10:41,690
+gonna have is test which is going to be
+
+232
+00:10:41,690 --> 00:10:44,329
+a regular expression okay so we're going
+
+233
+00:10:44,329 --> 00:10:46,490
+to use two slashes that's how we define
+
+234
+00:10:46,490 --> 00:10:49,190
+a regular expression literal and we're
+
+235
+00:10:49,190 --> 00:10:51,170
+just gonna say that we want to look at
+
+236
+00:10:51,170 --> 00:10:53,870
+all javascript files all dot j s files
+
+237
+00:10:53,870 --> 00:10:55,880
+so i'm going to put in the backslash
+
+238
+00:10:55,880 --> 00:10:58,339
+which is an escape character and then a
+
+239
+00:10:58,339 --> 00:11:00,709
+dot so that means that I want this dot
+
+240
+00:11:00,709 --> 00:11:04,190
+to be taken literally not as a meta
+
+241
+00:11:04,190 --> 00:11:04,900
+character
+
+242
+00:11:04,900 --> 00:11:07,480
+okay the escape is making it so it's a
+
+243
+00:11:07,480 --> 00:11:11,710
+literal dot then J s and then question
+
+244
+00:11:11,710 --> 00:11:14,170
+mark which makes it optional and then
+
+245
+00:11:14,170 --> 00:11:17,529
+the money sign which means it's the end
+
+246
+00:11:17,529 --> 00:11:21,240
+okay so it's the end any dot J's file
+
+247
+00:11:21,240 --> 00:11:23,350
+alright and then the next thing we want
+
+248
+00:11:23,350 --> 00:11:29,080
+is to put in exclude because we want to
+
+249
+00:11:29,080 --> 00:11:33,100
+we want to exclude the node modules
+
+250
+00:11:33,100 --> 00:11:36,850
+folder okay we don't want to do anything
+
+251
+00:11:36,850 --> 00:11:40,089
+with any node modules folder and then we
+
+252
+00:11:40,089 --> 00:11:42,250
+want to define the loader itself which
+
+253
+00:11:42,250 --> 00:11:46,060
+is going to be babel loader okay I
+
+254
+00:11:46,060 --> 00:11:48,040
+remember we installed that with NPM and
+
+255
+00:11:48,040 --> 00:11:51,790
+then we just want query and in query
+
+256
+00:11:51,790 --> 00:11:53,980
+which is an object this is where we
+
+257
+00:11:53,980 --> 00:11:57,910
+define our presets okay and presets is
+
+258
+00:11:57,910 --> 00:12:00,160
+gonna be an array and for now we're just
+
+259
+00:12:00,160 --> 00:12:02,680
+gonna put in env that's the preset that
+
+260
+00:12:02,680 --> 00:12:04,870
+we want to use so that's it that's our
+
+261
+00:12:04,870 --> 00:12:07,960
+entire config file for now so not too
+
+262
+00:12:07,960 --> 00:12:09,790
+hard to understand we have an entry
+
+263
+00:12:09,790 --> 00:12:13,990
+point for our es6 and es7 and whatever
+
+264
+00:12:13,990 --> 00:12:16,150
+else we wanted we want to write we can
+
+265
+00:12:16,150 --> 00:12:18,540
+use modules we can use whatever we want
+
+266
+00:12:18,540 --> 00:12:21,310
+from any standard and then it's going to
+
+267
+00:12:21,310 --> 00:12:25,450
+be output into build slash app bundle J
+
+268
+00:12:25,450 --> 00:12:27,940
+s and that's the file we want to include
+
+269
+00:12:27,940 --> 00:12:30,940
+in our HTML okay and then we just have
+
+270
+00:12:30,940 --> 00:12:34,180
+our babel loader as our module here as
+
+271
+00:12:34,180 --> 00:12:37,870
+our loader so let's save that and then
+
+272
+00:12:37,870 --> 00:12:41,400
+let's create a new folder called source
+
+273
+00:12:41,400 --> 00:12:43,839
+okay because remember we're gonna look
+
+274
+00:12:43,839 --> 00:12:45,430
+in source and then we're gonna look for
+
+275
+00:12:45,430 --> 00:12:51,100
+a pas so we're gonna create that and for
+
+276
+00:12:51,100 --> 00:12:52,540
+now what I'm gonna do is just put in
+
+277
+00:12:52,540 --> 00:12:54,700
+some I'll do the same thing I did in the
+
+278
+00:12:54,700 --> 00:12:57,520
+in the repple just to test equals one
+
+279
+00:12:57,520 --> 00:12:59,860
+two three actually we'll just set it to
+
+280
+00:12:59,860 --> 00:13:03,050
+an arrow
+
+281
+00:13:03,050 --> 00:13:08,030
+ah can't type the console dot log one
+
+282
+00:13:08,030 --> 00:13:11,900
+two three and save alright so what I
+
+283
+00:13:11,900 --> 00:13:15,290
+want to do now is compile this so if we
+
+284
+00:13:15,290 --> 00:13:17,510
+look in package dot Jason we created our
+
+285
+00:13:17,510 --> 00:13:19,790
+build script here so we should be able
+
+286
+00:13:19,790 --> 00:13:22,790
+to run this so let's open up our
+
+287
+00:13:22,790 --> 00:13:26,120
+terminal I'll clear it out we'll say NPM
+
+288
+00:13:26,120 --> 00:13:32,330
+run build all right so no red so no
+
+289
+00:13:32,330 --> 00:13:33,890
+errors everything should have one
+
+290
+00:13:33,890 --> 00:13:36,680
+alright so up here if we look we have a
+
+291
+00:13:36,680 --> 00:13:39,290
+build folder now creates automatically
+
+292
+00:13:39,290 --> 00:13:41,480
+we don't have to create it and then in
+
+293
+00:13:41,480 --> 00:13:43,850
+app bundle dot J s now there's going to
+
+294
+00:13:43,850 --> 00:13:46,550
+be a bunch of crap in here that doesn't
+
+295
+00:13:46,550 --> 00:13:49,280
+matter to us what we do want to look at
+
+296
+00:13:49,280 --> 00:13:52,550
+if we keep scrolling is this right here
+
+297
+00:13:52,550 --> 00:13:54,820
+okay so this is the code that we wrote
+
+298
+00:13:54,820 --> 00:13:58,220
+compiled so you can see that it used var
+
+299
+00:13:58,220 --> 00:14:00,110
+instead of let and it used a regular
+
+300
+00:14:00,110 --> 00:14:03,500
+function instead of an arrow function so
+
+301
+00:14:03,500 --> 00:14:07,880
+this es6 got compiled down to this es5
+
+302
+00:14:07,880 --> 00:14:11,230
+so this is going to work in all browsers
+
+303
+00:14:11,230 --> 00:14:13,580
+all right so this is what we want to
+
+304
+00:14:13,580 --> 00:14:15,950
+include in our HTML so what I'm gonna do
+
+305
+00:14:15,950 --> 00:14:19,940
+is create an HTML file in the root here
+
+306
+00:14:19,940 --> 00:14:24,590
+called index dot HTML and I'm just gonna
+
+307
+00:14:24,590 --> 00:14:27,250
+put some basic head body tags with Emmet
+
+308
+00:14:27,250 --> 00:14:29,630
+the title I'm just gonna say my
+
+309
+00:14:29,630 --> 00:14:38,930
+JavaScript app I'll just put h1 here
+
+310
+00:14:38,930 --> 00:14:41,160
+all right and then we want to go down
+
+311
+00:14:41,160 --> 00:14:44,910
+here and include a script with the
+
+312
+00:14:44,910 --> 00:14:50,370
+source of dot slash meaning we want to
+
+313
+00:14:50,370 --> 00:14:53,100
+look in the current directory for build
+
+314
+00:14:53,100 --> 00:15:00,150
+and then app dot bundle dot J s okay so
+
+315
+00:15:00,150 --> 00:15:02,280
+that's gonna look at our compiled file
+
+316
+00:15:02,280 --> 00:15:03,840
+that's what it's going to load so we'll
+
+317
+00:15:03,840 --> 00:15:09,020
+save that and now let's go to app J s
+
+318
+00:15:09,020 --> 00:15:14,900
+and let's just call test
+
+319
+00:15:14,900 --> 00:15:17,940
+ok so we'll save that and then we're
+
+320
+00:15:17,940 --> 00:15:22,790
+gonna recompile so npm run build and
+
+321
+00:15:22,790 --> 00:15:27,680
+then let's go and open up our index file
+
+322
+00:15:27,680 --> 00:15:32,790
+and let's hit f12 and we get one two
+
+323
+00:15:32,790 --> 00:15:36,060
+three all right so it's actually
+
+324
+00:15:36,060 --> 00:15:38,430
+compiling and it's loading into this
+
+325
+00:15:38,430 --> 00:15:41,220
+HTML file and if we look at our source
+
+326
+00:15:41,220 --> 00:15:44,580
+code click on this app bundle you'll see
+
+327
+00:15:44,580 --> 00:15:48,660
+our compiled es5 code alright so that's
+
+328
+00:15:48,660 --> 00:15:53,190
+how it works now keeping it like this is
+
+329
+00:15:53,190 --> 00:15:55,440
+gonna be kind of a pain in the ass
+
+330
+00:15:55,440 --> 00:15:57,510
+because every time you make a change
+
+331
+00:15:57,510 --> 00:15:59,460
+you're gonna have to recompile if we
+
+332
+00:15:59,460 --> 00:16:02,550
+change this to from one to three to
+
+333
+00:16:02,550 --> 00:16:06,090
+let's say hello and save and we open up
+
+334
+00:16:06,090 --> 00:16:08,910
+our index.html again and look in the
+
+335
+00:16:08,910 --> 00:16:12,090
+console we still get one two three all
+
+336
+00:16:12,090 --> 00:16:15,090
+right in order for that to change then
+
+337
+00:16:15,090 --> 00:16:17,010
+we'd have to go back and we'd have to
+
+338
+00:16:17,010 --> 00:16:22,680
+again run npm run build compile it and
+
+339
+00:16:22,680 --> 00:16:25,230
+then reload and then we get hello so
+
+340
+00:16:25,230 --> 00:16:27,300
+this is where web pack dev server comes
+
+341
+00:16:27,300 --> 00:16:30,480
+in so to do this this is actually really
+
+342
+00:16:30,480 --> 00:16:32,490
+easy all we have to do is go to web pack
+
+343
+00:16:32,490 --> 00:16:36,690
+config i'm sorry package jason and we're
+
+344
+00:16:36,690 --> 00:16:38,970
+gonna add another script here okay we're
+
+345
+00:16:38,970 --> 00:16:40,920
+gonna do a start script that way we can
+
+346
+00:16:40,920 --> 00:16:44,040
+just do npm start alright and then we
+
+347
+00:16:44,040 --> 00:16:49,170
+want to set this to
+
+348
+00:16:49,170 --> 00:16:54,790
+webpack - dev - server and then we need
+
+349
+00:16:54,790 --> 00:16:57,640
+to specify an output flag okay so we're
+
+350
+00:16:57,640 --> 00:17:00,780
+gonna say output actually output -
+
+351
+00:17:00,780 --> 00:17:04,750
+public - path and we want to set that
+
+352
+00:17:04,750 --> 00:17:07,930
+equal to whatever our output path was
+
+353
+00:17:07,930 --> 00:17:11,680
+which is build okay so we want to go
+
+354
+00:17:11,680 --> 00:17:13,630
+like that and then we'll go ahead and
+
+355
+00:17:13,630 --> 00:17:16,209
+save this and then go down here and
+
+356
+00:17:16,209 --> 00:17:18,850
+instead of running run build let's do
+
+357
+00:17:18,850 --> 00:17:24,430
+NPM start alright so now you can see
+
+358
+00:17:24,430 --> 00:17:26,760
+that this is actually started on port
+
+359
+00:17:26,760 --> 00:17:28,060
+8081
+
+360
+00:17:28,060 --> 00:17:31,090
+I believe it's 8080 by default but I
+
+361
+00:17:31,090 --> 00:17:32,800
+think I have something running on that
+
+362
+00:17:32,800 --> 00:17:37,210
+already so let's go ahead and open this
+
+363
+00:17:37,210 --> 00:17:40,930
+up can I open it up like that I guess
+
+364
+00:17:40,930 --> 00:17:49,330
+not so let's go to localhost port 8081
+
+365
+00:17:49,330 --> 00:17:52,660
+and there's our application that favicon
+
+366
+00:17:52,660 --> 00:17:54,970
+will go away if I reload and it says
+
+367
+00:17:54,970 --> 00:17:56,950
+hello all right so I'm just gonna snap
+
+368
+00:17:56,950 --> 00:18:00,160
+this to the side here now this is going
+
+369
+00:18:00,160 --> 00:18:02,530
+to continuously run and continuously
+
+370
+00:18:02,530 --> 00:18:04,750
+watch our applications so if I go to app
+
+371
+00:18:04,750 --> 00:18:07,960
+j/s and I change this back to one two
+
+372
+00:18:07,960 --> 00:18:11,830
+three and save not only is it going to
+
+373
+00:18:11,830 --> 00:18:14,140
+reload it's also going to reload the
+
+374
+00:18:14,140 --> 00:18:16,420
+browser for us so we don't even have to
+
+375
+00:18:16,420 --> 00:18:16,990
+do that
+
+376
+00:18:16,990 --> 00:18:20,470
+so web pack dev server is a really nice
+
+377
+00:18:20,470 --> 00:18:23,140
+tool to have if you're working with web
+
+378
+00:18:23,140 --> 00:18:26,560
+pack so the idea is to use that until
+
+379
+00:18:26,560 --> 00:18:28,360
+you know you're ready to build and then
+
+380
+00:18:28,360 --> 00:18:30,640
+you do NPM run build you have your
+
+381
+00:18:30,640 --> 00:18:32,950
+static assets and you can upload to your
+
+382
+00:18:32,950 --> 00:18:35,140
+server or whatever it is you're doing
+
+383
+00:18:35,140 --> 00:18:39,850
+with your application alright so now
+
+384
+00:18:39,850 --> 00:18:42,280
+let's take a look at one of the reasons
+
+385
+00:18:42,280 --> 00:18:44,680
+why we're even doing this and that's to
+
+386
+00:18:44,680 --> 00:18:47,670
+use modules so let's clear this out and
+
+387
+00:18:47,670 --> 00:18:50,260
+what I'm gonna do is create in my source
+
+388
+00:18:50,260 --> 00:18:56,140
+folder a new file called Lib das okay
+
+389
+00:18:56,140 --> 00:18:58,150
+and this is going to be a module I want
+
+390
+00:18:58,150 --> 00:19:01,179
+to export something from this and import
+
+391
+00:19:01,179 --> 00:19:01,980
+it into App
+
+392
+00:19:01,980 --> 00:19:04,770
+which is something we cannot do just
+
+393
+00:19:04,770 --> 00:19:06,929
+within regular JavaScript within the
+
+394
+00:19:06,929 --> 00:19:09,690
+browser at least yet so what I'm gonna
+
+395
+00:19:09,690 --> 00:19:12,510
+do is say export and then I'm gonna
+
+396
+00:19:12,510 --> 00:19:15,390
+create a variable called person and I'm
+
+397
+00:19:15,390 --> 00:19:17,640
+gonna set this to an object literal and
+
+398
+00:19:17,640 --> 00:19:23,850
+just say name John Doe let's say
+
+399
+00:19:23,850 --> 00:19:32,820
+location Miami and age 30 all right so
+
+400
+00:19:32,820 --> 00:19:34,980
+we just have this person object and
+
+401
+00:19:34,980 --> 00:19:37,290
+we're exporting it okay exporting
+
+402
+00:19:37,290 --> 00:19:39,720
+meaning that we're making it available
+
+403
+00:19:39,720 --> 00:19:43,620
+to other files so let's save this let's
+
+404
+00:19:43,620 --> 00:19:47,160
+go back to AB js' and let's go ahead and
+
+405
+00:19:47,160 --> 00:19:50,910
+say import put some curly braces here
+
+406
+00:19:50,910 --> 00:19:58,440
+and say person from dot slash lib okay
+
+407
+00:19:58,440 --> 00:20:01,950
+we don't need the dot J s the file name
+
+408
+00:20:01,950 --> 00:20:04,500
+not the extension and then we'll go down
+
+409
+00:20:04,500 --> 00:20:08,429
+here and let's do alerts will say alert
+
+410
+00:20:08,429 --> 00:20:12,720
+person dot name and save and that should
+
+411
+00:20:12,720 --> 00:20:15,450
+reload and run and we get John Doe so
+
+412
+00:20:15,450 --> 00:20:18,000
+this John Doe this person dot name is
+
+413
+00:20:18,000 --> 00:20:20,070
+coming from another filed so this is
+
+414
+00:20:20,070 --> 00:20:23,000
+very very powerful when building
+
+415
+00:20:23,000 --> 00:20:26,540
+applications and gives you a more of a
+
+416
+00:20:26,540 --> 00:20:30,090
+you know a react or angular type feel
+
+417
+00:20:30,090 --> 00:20:32,940
+you can build applications that seem
+
+418
+00:20:32,940 --> 00:20:35,669
+like framework type applications rather
+
+419
+00:20:35,669 --> 00:20:38,000
+than putting everything in one file or
+
+420
+00:20:38,000 --> 00:20:41,100
+including a bunch of these script tags
+
+421
+00:20:41,100 --> 00:20:43,650
+with a bunch of different files so the
+
+422
+00:20:43,650 --> 00:20:47,669
+module system is very very powerful all
+
+423
+00:20:47,669 --> 00:20:49,169
+right and you can have other things you
+
+424
+00:20:49,169 --> 00:20:51,179
+can export other things here like let's
+
+425
+00:20:51,179 --> 00:20:56,070
+say we want to export a function so
+
+426
+00:20:56,070 --> 00:21:03,330
+we'll say export function say hello so
+
+427
+00:21:03,330 --> 00:21:06,090
+go like that and let's say this takes in
+
+428
+00:21:06,090 --> 00:21:09,330
+a name and then we'll say we'll just
+
+429
+00:21:09,330 --> 00:21:11,390
+return
+
+430
+00:21:11,390 --> 00:21:13,700
+and we'll use a template literal here
+
+431
+00:21:13,700 --> 00:21:19,460
+we'll just say hello name like that so
+
+432
+00:21:19,460 --> 00:21:20,929
+we'll save and then we can go back to
+
+433
+00:21:20,929 --> 00:21:23,120
+our ads that's gonna reload every time
+
+434
+00:21:23,120 --> 00:21:26,350
+we save maybe we should do a console log
+
+435
+00:21:26,350 --> 00:21:31,179
+and then what we can do is we're using
+
+436
+00:21:31,179 --> 00:21:34,160
+destructuring here and we can also pull
+
+437
+00:21:34,160 --> 00:21:36,650
+out other things from this file such as
+
+438
+00:21:36,650 --> 00:21:40,490
+say hello and then we'll go down here
+
+439
+00:21:40,490 --> 00:21:46,309
+and we'll call say hello and let's pass
+
+440
+00:21:46,309 --> 00:21:50,150
+in a name we'll just say Brad let's save
+
+441
+00:21:50,150 --> 00:21:53,150
+and down here whoops wait a minute
+
+442
+00:21:53,150 --> 00:21:54,010
+what'd I do
+
+443
+00:21:54,010 --> 00:21:57,940
+oh I got a since I just returned it here
+
+444
+00:21:57,940 --> 00:22:05,660
+we have to console.log the function so
+
+445
+00:22:05,660 --> 00:22:07,400
+we'll save and then we get John Doe
+
+446
+00:22:07,400 --> 00:22:09,020
+which comes from this line and then
+
+447
+00:22:09,020 --> 00:22:10,940
+hello Brad which comes from this and
+
+448
+00:22:10,940 --> 00:22:13,400
+both of these are coming from our Lib
+
+449
+00:22:13,400 --> 00:22:17,780
+Jas file here alright so that is modules
+
+450
+00:22:17,780 --> 00:22:20,270
+now I want to take a look at a newer
+
+451
+00:22:20,270 --> 00:22:25,370
+feature of es 2017 which is async/await
+
+452
+00:22:25,370 --> 00:22:27,910
+alright now I'm not going to go over the
+
+453
+00:22:27,910 --> 00:22:30,890
+over async/await and 10 really talk
+
+454
+00:22:30,890 --> 00:22:32,210
+about it I'm gonna do that in a
+
+455
+00:22:32,210 --> 00:22:34,669
+different video we're also going to be
+
+456
+00:22:34,669 --> 00:22:36,470
+talked about that and the new udemy
+
+457
+00:22:36,470 --> 00:22:39,260
+course coming out but it's just a better
+
+458
+00:22:39,260 --> 00:22:42,950
+way to handle asynchronous operations so
+
+459
+00:22:42,950 --> 00:22:46,250
+what we can do is we can say async we
+
+460
+00:22:46,250 --> 00:22:49,010
+can label a function asynchronous which
+
+461
+00:22:49,010 --> 00:22:51,799
+makes it return a promise automatically
+
+462
+00:22:51,799 --> 00:22:57,750
+I would say get posts
+
+463
+00:22:57,750 --> 00:23:00,990
+okay and then what I'm going to do is
+
+464
+00:23:00,990 --> 00:23:03,840
+create a variable here called response
+
+465
+00:23:03,840 --> 00:23:06,180
+and then I'm going to set it equal to
+
+466
+00:23:06,180 --> 00:23:08,580
+I'm going to use fetch to get something
+
+467
+00:23:08,580 --> 00:23:10,890
+from Jason placeholder which is
+
+468
+00:23:10,890 --> 00:23:13,590
+basically a fake REST API that we can
+
+469
+00:23:13,590 --> 00:23:16,880
+use I've used it in quite a few videos
+
+470
+00:23:16,880 --> 00:23:19,500
+but we can make requests to like this
+
+471
+00:23:19,500 --> 00:23:21,510
+post URL right here
+
+472
+00:23:21,510 --> 00:23:23,370
+so what I'm gonna do is I'm gonna say a
+
+473
+00:23:23,370 --> 00:23:28,980
+weight fetch and if you don't know what
+
+474
+00:23:28,980 --> 00:23:31,140
+fetch is it's pot it's a new standard in
+
+475
+00:23:31,140 --> 00:23:34,950
+the browser to make HTTP requests and it
+
+476
+00:23:34,950 --> 00:23:38,190
+returns data as a promise so since it
+
+477
+00:23:38,190 --> 00:23:39,900
+returns as a promise we're gonna say a
+
+478
+00:23:39,900 --> 00:23:42,660
+weight and then we're gonna pass in this
+
+479
+00:23:42,660 --> 00:23:49,880
+URL like that and then we're gonna say
+
+480
+00:23:49,880 --> 00:23:55,530
+right under it Const data and we can say
+
+481
+00:23:55,530 --> 00:24:02,480
+equals a weight response dot jason and
+
+482
+00:24:02,480 --> 00:24:08,580
+then we can return that data all right
+
+483
+00:24:08,580 --> 00:24:15,600
+why am I getting a error here oh I don't
+
+484
+00:24:15,600 --> 00:24:19,980
+have quotes in here okay so that's our
+
+485
+00:24:19,980 --> 00:24:22,260
+get put that's our get post asynchronous
+
+486
+00:24:22,260 --> 00:24:27,030
+function now to call this since it's it
+
+487
+00:24:27,030 --> 00:24:29,100
+we called it async then it's going to
+
+488
+00:24:29,100 --> 00:24:32,240
+return a promise so we say get posts and
+
+489
+00:24:32,240 --> 00:24:35,880
+with promises we use dot then and we'll
+
+490
+00:24:35,880 --> 00:24:38,100
+pass in here posts and then we'll just
+
+491
+00:24:38,100 --> 00:24:43,710
+console dot log posts all right so if we
+
+492
+00:24:43,710 --> 00:24:45,510
+go ahead and save this and we let this
+
+493
+00:24:45,510 --> 00:24:49,020
+run we're gonna get an error so we get
+
+494
+00:24:49,020 --> 00:24:52,230
+this regenerator run time is not defined
+
+495
+00:24:52,230 --> 00:24:55,410
+and to fix this we actually need to use
+
+496
+00:24:55,410 --> 00:24:59,340
+the babel polyfill all right if I were
+
+497
+00:24:59,340 --> 00:25:03,600
+to search this see what we get if we
+
+498
+00:25:03,600 --> 00:25:07,250
+search this error here
+
+499
+00:25:07,250 --> 00:25:09,750
+right here I'm trying to use async await
+
+500
+00:25:09,750 --> 00:25:11,400
+with Babel six
+
+501
+00:25:11,400 --> 00:25:14,280
+so right here Babel polyfill is required
+
+502
+00:25:14,280 --> 00:25:16,650
+you must use that in order to get why is
+
+503
+00:25:16,650 --> 00:25:17,940
+this not responsive
+
+504
+00:25:17,940 --> 00:25:21,450
+why is Stack Overflow not responsive but
+
+505
+00:25:21,450 --> 00:25:23,610
+you'll see that we need to install Babel
+
+506
+00:25:23,610 --> 00:25:26,880
+polyfill along with this Babel preset
+
+507
+00:25:26,880 --> 00:25:32,730
+stage zero and then down here we need to
+
+508
+00:25:32,730 --> 00:25:36,080
+add that to our web pack config file
+
+509
+00:25:36,080 --> 00:25:39,710
+okay so let's do that let's go ahead and
+
+510
+00:25:39,710 --> 00:25:43,860
+ctrl C stop this webpack dev server and
+
+511
+00:25:43,860 --> 00:25:48,030
+we're gonna do NPM install - - save -
+
+512
+00:25:48,030 --> 00:25:53,940
+dev and we want to install babel - poly
+
+513
+00:25:53,940 --> 00:26:00,450
+fill as well as babel - shoot what was
+
+514
+00:26:00,450 --> 00:26:06,330
+it i always forget this one babel preset
+
+515
+00:26:06,330 --> 00:26:13,830
+stage - zero alright so install those
+
+516
+00:26:13,830 --> 00:26:19,590
+two things now that by itself isn't
+
+517
+00:26:19,590 --> 00:26:21,690
+gonna work we need to go to our web pack
+
+518
+00:26:21,690 --> 00:26:26,850
+config file and from here we want to add
+
+519
+00:26:26,850 --> 00:26:30,510
+on to the app in the entry so I'm just
+
+520
+00:26:30,510 --> 00:26:32,670
+gonna put I'm gonna go right above it
+
+521
+00:26:32,670 --> 00:26:35,190
+and we're just gonna put in some quotes
+
+522
+00:26:35,190 --> 00:26:40,350
+and we're gonna say babble - polyfill
+
+523
+00:26:40,350 --> 00:26:43,140
+and then a comma and then down here with
+
+524
+00:26:43,140 --> 00:26:44,880
+our presets we just want to include that
+
+525
+00:26:44,880 --> 00:26:48,690
+stage zero preset alright and that
+
+526
+00:26:48,690 --> 00:26:51,450
+should do it so let's save let's go back
+
+527
+00:26:51,450 --> 00:26:55,770
+over here and let's run NPM start let's
+
+528
+00:26:55,770 --> 00:27:01,730
+have our page up here and run NPM start
+
+529
+00:27:01,730 --> 00:27:06,630
+ok looks like we got an error unexpected
+
+530
+00:27:06,630 --> 00:27:12,510
+token where is this let's see what did I
+
+531
+00:27:12,510 --> 00:27:16,920
+do wrong here Babel polyfill
+
+532
+00:27:16,920 --> 00:27:23,700
+oh I did this idiot this goes in here so
+
+533
+00:27:23,700 --> 00:27:30,930
+app and then this should be an array and
+
+534
+00:27:30,930 --> 00:27:36,980
+we'll put that in there like that
+
+535
+00:27:36,980 --> 00:27:40,680
+yeah that should do it so let's save
+
+536
+00:27:40,680 --> 00:27:48,530
+that let's try it again and Pam start
+
+537
+00:27:48,530 --> 00:27:52,710
+okay let's reload and there we go if we
+
+538
+00:27:52,710 --> 00:27:55,140
+look down here we're now fetching our
+
+539
+00:27:55,140 --> 00:27:57,930
+post so this is coming from right here
+
+540
+00:27:57,930 --> 00:27:59,460
+our async/await
+
+541
+00:27:59,460 --> 00:28:02,070
+get post function we're returning a
+
+542
+00:28:02,070 --> 00:28:03,960
+promise here getting the post and we're
+
+543
+00:28:03,960 --> 00:28:06,360
+logging them so you can see that now
+
+544
+00:28:06,360 --> 00:28:08,820
+this can be used this this web pack
+
+545
+00:28:08,820 --> 00:28:11,430
+babble starter package can be used to
+
+546
+00:28:11,430 --> 00:28:16,620
+compile down anything from es2015 1617
+
+547
+00:28:16,620 --> 00:28:20,070
+to es 5 so it's something that you can
+
+548
+00:28:20,070 --> 00:28:22,410
+continuously use and hopefully you guys
+
+549
+00:28:22,410 --> 00:28:25,320
+will use it now as far as compiling like
+
+550
+00:28:25,320 --> 00:28:26,670
+let's say you just built an awesome
+
+551
+00:28:26,670 --> 00:28:29,880
+application with modules with a sink of
+
+552
+00:28:29,880 --> 00:28:32,070
+weight and all that all you got to do is
+
+553
+00:28:32,070 --> 00:28:36,540
+now simply do and where is it npm run
+
+554
+00:28:36,540 --> 00:28:40,740
+build and then it builds it out into
+
+555
+00:28:40,740 --> 00:28:43,350
+that app bundle file you have your
+
+556
+00:28:43,350 --> 00:28:47,030
+index.html file so you could simply
+
+557
+00:28:47,030 --> 00:28:52,290
+let's say this is your web server you
+
+558
+00:28:52,290 --> 00:28:54,420
+could just take the build and the
+
+559
+00:28:54,420 --> 00:29:01,020
+index.html go in there open up your file
+
+560
+00:29:01,020 --> 00:29:03,960
+and let's open up our console and we
+
+561
+00:29:03,960 --> 00:29:07,020
+have our posts ok and we're using it's
+
+562
+00:29:07,020 --> 00:29:09,590
+all compiled down to this one file and
+
+563
+00:29:09,590 --> 00:29:12,090
+you could have you could have 30
+
+564
+00:29:12,090 --> 00:29:13,890
+different modules it would still all
+
+565
+00:29:13,890 --> 00:29:16,530
+compile down to that one file alright so
+
+566
+00:29:16,530 --> 00:29:18,180
+hopefully you guys enjoyed this and
+
+567
+00:29:18,180 --> 00:29:20,210
+that's it thanks for watching
+
+568
+00:29:20,210 --> 00:29:22,320
+hey guys I just want to mention our
+
+569
+00:29:22,320 --> 00:29:24,540
+sponsor GPD host so if you're looking
+
+570
+00:29:24,540 --> 00:29:27,120
+for affordable fast and quality cpanel
+
+571
+00:29:27,120 --> 00:29:29,430
+hosting look no further they offer many
+
+572
+00:29:29,430 --> 00:29:30,540
+types of packages
+
+573
+00:29:30,540 --> 00:29:33,000
+that include a free domain name free SSL
+
+574
+00:29:33,000 --> 00:29:35,100
+certificate a website builder and more
+
+575
+00:29:35,100 --> 00:29:37,500
+all hosting plans are completely managed
+
+576
+00:29:37,500 --> 00:29:38,940
+and easy to work with
+
+577
+00:29:38,940 --> 00:29:41,820
+you also get automatic weekly backups so
+
+578
+00:29:41,820 --> 00:29:43,620
+whether you have a website to transfer
+
+579
+00:29:43,620 --> 00:29:45,960
+or you're building it from scratch GPD
+
+580
+00:29:45,960 --> 00:29:48,390
+host is a high quality solution to learn
+
+581
+00:29:48,390 --> 00:29:51,060
+more visit GPD host comm or click the
+
+582
+00:29:51,060 --> 00:29:54,170
+link in the description below
+

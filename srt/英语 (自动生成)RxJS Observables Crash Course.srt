@@ -1,0 +1,5020 @@
+﻿1
+00:00:00,210 --> 00:00:02,159
+hey what's going on guys this
+
+2
+00:00:02,159 --> 00:00:03,720
+mini-course is going to be an
+
+3
+00:00:03,720 --> 00:00:06,660
+introduction to rxjs and reactive
+
+4
+00:00:06,660 --> 00:00:10,230
+programming so rxjs stands for reactive
+
+5
+00:00:10,230 --> 00:00:13,049
+extensions for JavaScript reactive
+
+6
+00:00:13,049 --> 00:00:15,900
+extensions or reactive X is a library
+
+7
+00:00:15,900 --> 00:00:17,850
+for working with asynchronous data
+
+8
+00:00:17,850 --> 00:00:20,609
+streams and observables alright all the
+
+9
+00:00:20,609 --> 00:00:22,949
+content in this video is covered much
+
+10
+00:00:22,949 --> 00:00:24,900
+more thoroughly in the full course
+
+11
+00:00:24,900 --> 00:00:27,420
+available from edge wanax so if you like
+
+12
+00:00:27,420 --> 00:00:29,010
+this video I would strongly suggest
+
+13
+00:00:29,010 --> 00:00:31,199
+checking that out and I'll leave a link
+
+14
+00:00:31,199 --> 00:00:34,320
+in the description so what is reactive
+
+15
+00:00:34,320 --> 00:00:36,149
+programming most of you have probably
+
+16
+00:00:36,149 --> 00:00:38,850
+already worked with it ok you just don't
+
+17
+00:00:38,850 --> 00:00:40,140
+know it yet if you've worked with
+
+18
+00:00:40,140 --> 00:00:43,770
+angular 2 rxjs and observables are
+
+19
+00:00:43,770 --> 00:00:46,620
+pretty big part of that all right so if
+
+20
+00:00:46,620 --> 00:00:48,780
+you google reactive programming you will
+
+21
+00:00:48,780 --> 00:00:51,149
+find some information but a lot of it is
+
+22
+00:00:51,149 --> 00:00:54,300
+really vague or theoretical or too
+
+23
+00:00:54,300 --> 00:00:57,270
+complicated so the purpose of this edge
+
+24
+00:00:57,270 --> 00:01:00,149
+Ronix course in this video is to give
+
+25
+00:01:00,149 --> 00:01:02,520
+you some really some solid practical
+
+26
+00:01:02,520 --> 00:01:03,270
+examples
+
+27
+00:01:03,270 --> 00:01:06,210
+all right so reactive programming is a
+
+28
+00:01:06,210 --> 00:01:08,909
+programming paradigm that works with
+
+29
+00:01:08,909 --> 00:01:12,000
+asynchronous data streams and these data
+
+30
+00:01:12,000 --> 00:01:14,580
+streams can come from or be created by
+
+31
+00:01:14,580 --> 00:01:17,340
+many different things so things like UI
+
+32
+00:01:17,340 --> 00:01:21,390
+events like clicks or key presses HTTP
+
+33
+00:01:21,390 --> 00:01:24,780
+requests file systems array like object
+
+34
+00:01:24,780 --> 00:01:26,640
+strings and even your machines memory
+
+35
+00:01:26,640 --> 00:01:29,700
+and cache ok these things can be turned
+
+36
+00:01:29,700 --> 00:01:33,380
+into or can be viewed as a data stream
+
+37
+00:01:33,380 --> 00:01:37,049
+so a stream is defined as a sequence of
+
+38
+00:01:37,049 --> 00:01:39,470
+ongoing events ordered in time and
+
+39
+00:01:39,470 --> 00:01:41,970
+there's a few things we can get from a
+
+40
+00:01:41,970 --> 00:01:44,399
+stream so we can get the data that it
+
+41
+00:01:44,399 --> 00:01:47,040
+emits which could be virtually anything
+
+42
+00:01:47,040 --> 00:01:50,220
+and any kind any type of data we can get
+
+43
+00:01:50,220 --> 00:01:52,110
+errors if something goes wrong and then
+
+44
+00:01:52,110 --> 00:01:54,210
+we can get a signal that notifies us
+
+45
+00:01:54,210 --> 00:01:56,670
+when it's complete if in fact it does
+
+46
+00:01:56,670 --> 00:01:59,790
+complete some of them don't so if we
+
+47
+00:01:59,790 --> 00:02:01,649
+look at this image right here represents
+
+48
+00:02:01,649 --> 00:02:04,590
+a stream so we start with some kind of
+
+49
+00:02:04,590 --> 00:02:07,439
+event indicates an event with some kind
+
+50
+00:02:07,439 --> 00:02:10,379
+of value for example coordinates of a
+
+51
+00:02:10,379 --> 00:02:12,840
+click all right so moves along the
+
+52
+00:02:12,840 --> 00:02:13,890
+stream if
+
+53
+00:02:13,890 --> 00:02:16,050
+something goes wrong it can send off an
+
+54
+00:02:16,050 --> 00:02:19,380
+error which can notify we can have our
+
+55
+00:02:19,380 --> 00:02:22,530
+application react to that our ok and
+
+56
+00:02:22,530 --> 00:02:24,780
+then it keeps going and it can send off
+
+57
+00:02:24,780 --> 00:02:27,360
+a signal when it's complete now some
+
+58
+00:02:27,360 --> 00:02:29,760
+streams won't complete for instance most
+
+59
+00:02:29,760 --> 00:02:32,820
+movements you can get a stream from most
+
+60
+00:02:32,820 --> 00:02:34,709
+movements and obviously those don't
+
+61
+00:02:34,709 --> 00:02:35,940
+complete they're just going to keep
+
+62
+00:02:35,940 --> 00:02:38,450
+going as long as you move the mouse
+
+63
+00:02:38,450 --> 00:02:41,489
+whereas something like an HTTP GET
+
+64
+00:02:41,489 --> 00:02:43,350
+request you're going to get the data
+
+65
+00:02:43,350 --> 00:02:45,030
+it's going to come through in the stream
+
+66
+00:02:45,030 --> 00:02:47,489
+and it's going to complete now the way
+
+67
+00:02:47,489 --> 00:02:49,860
+that we work with these streams is with
+
+68
+00:02:49,860 --> 00:02:52,019
+what's called an observable so
+
+69
+00:02:52,019 --> 00:02:54,090
+observables are used to watch these
+
+70
+00:02:54,090 --> 00:02:56,130
+streams and they'll emit a function when
+
+71
+00:02:56,130 --> 00:02:58,590
+the value is emitted or an error or a
+
+72
+00:02:58,590 --> 00:03:00,690
+complete signal is returned
+
+73
+00:03:00,690 --> 00:03:03,480
+so observables can be subscribed to by
+
+74
+00:03:03,480 --> 00:03:05,850
+an observer and there's no limit to how
+
+75
+00:03:05,850 --> 00:03:07,769
+many subscriptions and observable can
+
+76
+00:03:07,769 --> 00:03:10,260
+have so we can interact with these data
+
+77
+00:03:10,260 --> 00:03:12,180
+streams as if they were just a regular
+
+78
+00:03:12,180 --> 00:03:15,060
+array we can use array like methods and
+
+79
+00:03:15,060 --> 00:03:17,670
+we have a whole bunch of operators that
+
+80
+00:03:17,670 --> 00:03:19,739
+will allow us to manipulate the data
+
+81
+00:03:19,739 --> 00:03:23,070
+pretty much however we want so right now
+
+82
+00:03:23,070 --> 00:03:25,350
+we can't just use standard JavaScript
+
+83
+00:03:25,350 --> 00:03:28,920
+es5 or even es6 to work with observables
+
+84
+00:03:28,920 --> 00:03:31,890
+and streams and reactive extensions is
+
+85
+00:03:31,890 --> 00:03:34,260
+what allows us to do that which is also
+
+86
+00:03:34,260 --> 00:03:37,079
+sometimes called reactive X all right so
+
+87
+00:03:37,079 --> 00:03:38,640
+it's a library for composing
+
+88
+00:03:38,640 --> 00:03:40,260
+asynchronous programs by using
+
+89
+00:03:40,260 --> 00:03:42,959
+observable sequences and it provides us
+
+90
+00:03:42,959 --> 00:03:45,269
+with a long list of operators which
+
+91
+00:03:45,269 --> 00:03:47,970
+allow us to filter select transform
+
+92
+00:03:47,970 --> 00:03:51,450
+combined and compose observables now
+
+93
+00:03:51,450 --> 00:03:54,329
+reactive extensions is not limited to
+
+94
+00:03:54,329 --> 00:03:57,329
+just JavaScript if you look at this list
+
+95
+00:03:57,329 --> 00:03:59,820
+you can see that it's available for many
+
+96
+00:03:59,820 --> 00:04:01,950
+of the popular programming languages of
+
+97
+00:04:01,950 --> 00:04:04,709
+all types now the reason I chose
+
+98
+00:04:04,709 --> 00:04:07,230
+JavaScript and rxjs is because
+
+99
+00:04:07,230 --> 00:04:10,290
+javascript is a well-known language the
+
+100
+00:04:10,290 --> 00:04:15,420
+rxjs library is pretty stable and goes
+
+101
+00:04:15,420 --> 00:04:17,250
+in-depth in terms of what you can do
+
+102
+00:04:17,250 --> 00:04:19,979
+with it and also that's JavaScript is
+
+103
+00:04:19,979 --> 00:04:22,820
+happens to be what I specialize in so
+
+104
+00:04:22,820 --> 00:04:24,840
+that's what we'll be using throughout
+
+105
+00:04:24,840 --> 00:04:27,419
+this video and throughout the
+
+106
+00:04:27,419 --> 00:04:30,300
+reactive extensions course alright so
+
+107
+00:04:30,300 --> 00:04:31,889
+before we get started let's just take a
+
+108
+00:04:31,889 --> 00:04:33,599
+look at exactly what we'll be covering
+
+109
+00:04:33,599 --> 00:04:36,750
+here so I'll show you how to observe and
+
+110
+00:04:36,750 --> 00:04:39,330
+examine asynchronous data streams that
+
+111
+00:04:39,330 --> 00:04:42,090
+come from UI events will create
+
+112
+00:04:42,090 --> 00:04:45,240
+observables from array like objects will
+
+113
+00:04:45,240 --> 00:04:47,490
+create observables from scratch we'll
+
+114
+00:04:47,490 --> 00:04:49,250
+learn how to filter and transform
+
+115
+00:04:49,250 --> 00:04:52,949
+observables how to create observables
+
+116
+00:04:52,949 --> 00:04:55,259
+from promises and we'll look at some of
+
+117
+00:04:55,259 --> 00:04:57,539
+the really helpful operators that the
+
+118
+00:04:57,539 --> 00:05:00,060
+reactive extensions library gives us and
+
+119
+00:05:00,060 --> 00:05:03,050
+then we'll take a look at error handling
+
+120
+00:05:03,050 --> 00:05:05,819
+all right so that's it let's go ahead
+
+121
+00:05:05,819 --> 00:05:08,340
+and jump in and start to take a look at
+
+122
+00:05:08,340 --> 00:05:13,680
+some code alright so we're going to
+
+123
+00:05:13,680 --> 00:05:15,509
+start out with creating our environment
+
+124
+00:05:15,509 --> 00:05:16,919
+and there's just a few things that I
+
+125
+00:05:16,919 --> 00:05:19,889
+want to explain before we get started so
+
+126
+00:05:19,889 --> 00:05:22,680
+this is the reactive X website reactive
+
+127
+00:05:22,680 --> 00:05:26,069
+X dot IO and this is the main API for
+
+128
+00:05:26,069 --> 00:05:28,949
+reactive extensions which is available
+
+129
+00:05:28,949 --> 00:05:31,319
+in many different languages so if we
+
+130
+00:05:31,319 --> 00:05:33,120
+click on choose your platform you can
+
+131
+00:05:33,120 --> 00:05:35,310
+see all the different languages that the
+
+132
+00:05:35,310 --> 00:05:37,550
+library is available for now we're using
+
+133
+00:05:37,550 --> 00:05:41,250
+JavaScript so we're using rxjs now if I
+
+134
+00:05:41,250 --> 00:05:42,659
+click on that it'll bring us to the
+
+135
+00:05:42,659 --> 00:05:45,690
+github page and this is for it's
+
+136
+00:05:45,690 --> 00:05:46,770
+important to note that this is for
+
+137
+00:05:46,770 --> 00:05:49,650
+version 4 all right we're going to be
+
+138
+00:05:49,650 --> 00:05:52,259
+using version 5 which isn't beta but it
+
+139
+00:05:52,259 --> 00:05:55,650
+is very stable alright so the I mean the
+
+140
+00:05:55,650 --> 00:05:57,419
+most of the API is the same but there
+
+141
+00:05:57,419 --> 00:05:59,219
+are a few operators that have been
+
+142
+00:05:59,219 --> 00:06:02,669
+changed in rxjs 5 but notice that
+
+143
+00:06:02,669 --> 00:06:05,849
+version 4 is at github reactive
+
+144
+00:06:05,849 --> 00:06:08,509
+extensions slash rxjs
+
+145
+00:06:08,509 --> 00:06:12,810
+version 5 is at github reactive X slash
+
+146
+00:06:12,810 --> 00:06:15,569
+rxjs and you can see this is version 5
+
+147
+00:06:15,569 --> 00:06:17,789
+so if you're looking for the doc for
+
+148
+00:06:17,789 --> 00:06:19,620
+documentation this is where you want to
+
+149
+00:06:19,620 --> 00:06:22,080
+be all right if you're if you're
+
+150
+00:06:22,080 --> 00:06:24,839
+following along with this course now the
+
+151
+00:06:24,839 --> 00:06:27,060
+migration guide right here says
+
+152
+00:06:27,060 --> 00:06:29,699
+migrating from 4 to 5 if I click on that
+
+153
+00:06:29,699 --> 00:06:32,639
+it'll just show you the rxjs for
+
+154
+00:06:32,639 --> 00:06:35,669
+operators and what the what the version
+
+155
+00:06:35,669 --> 00:06:38,130
+5 operators what they've been changed to
+
+156
+00:06:38,130 --> 00:06:41,300
+all right now as far as our environment
+
+157
+00:06:41,300 --> 00:06:44,330
+you can just use an HTML file and
+
+158
+00:06:44,330 --> 00:06:48,139
+include the rxjs main javascript this is
+
+159
+00:06:48,139 --> 00:06:52,250
+a list of the CDNs now you'll see that
+
+160
+00:06:52,250 --> 00:06:54,410
+it's broken up into different aspects
+
+161
+00:06:54,410 --> 00:06:57,770
+but what you want to do is include if
+
+162
+00:06:57,770 --> 00:06:59,750
+you're going to use a CDN you want to
+
+163
+00:06:59,750 --> 00:07:03,620
+just include the RX dot all J s and
+
+164
+00:07:03,620 --> 00:07:05,900
+notice that this is version 4 if you're
+
+165
+00:07:05,900 --> 00:07:07,130
+following along you're going to want to
+
+166
+00:07:07,130 --> 00:07:10,009
+choose the latest version of 5 in this
+
+167
+00:07:10,009 --> 00:07:13,340
+case it's beta 12 all right so you just
+
+168
+00:07:13,340 --> 00:07:16,310
+want to include one of these either the
+
+169
+00:07:16,310 --> 00:07:18,440
+minified or the regular alright but
+
+170
+00:07:18,440 --> 00:07:19,849
+we're not going to use a CDN we're going
+
+171
+00:07:19,849 --> 00:07:22,699
+to be using a an environment using
+
+172
+00:07:22,699 --> 00:07:26,659
+webpack and babel now initially I was
+
+173
+00:07:26,659 --> 00:07:28,940
+going to go through all the steps to set
+
+174
+00:07:28,940 --> 00:07:31,190
+that up but it was too time-consuming
+
+175
+00:07:31,190 --> 00:07:34,340
+and I really want to just focus on rxjs
+
+176
+00:07:34,340 --> 00:07:37,819
+and observables in them in the actual
+
+177
+00:07:37,819 --> 00:07:40,250
+course from adju annex I do go through
+
+178
+00:07:40,250 --> 00:07:41,750
+and show you exactly how to set it up
+
+179
+00:07:41,750 --> 00:07:43,490
+but in this case we're going to just
+
+180
+00:07:43,490 --> 00:07:45,860
+grab it from github alright so if you go
+
+181
+00:07:45,860 --> 00:07:48,650
+to github.com slash brad traversée
+
+182
+00:07:48,650 --> 00:07:52,550
+slash rxjs underscore boiler and it's
+
+183
+00:07:52,550 --> 00:07:54,229
+pretty easy to set up okay so we just
+
+184
+00:07:54,229 --> 00:07:57,169
+need to install our dependencies we need
+
+185
+00:07:57,169 --> 00:07:59,150
+to compile the JavaScript of web pack
+
+186
+00:07:59,150 --> 00:08:01,250
+and we can run it in watch mode so that
+
+187
+00:08:01,250 --> 00:08:03,530
+it updates every time we save the file
+
+188
+00:08:03,530 --> 00:08:05,599
+and then we just need to install live
+
+189
+00:08:05,599 --> 00:08:09,409
+server and run it glow run NPM start so
+
+190
+00:08:09,409 --> 00:08:11,750
+let's go ahead and do that now you can
+
+191
+00:08:11,750 --> 00:08:13,639
+you can clone it with git or you can
+
+192
+00:08:13,639 --> 00:08:15,020
+just download it I'm just going to
+
+193
+00:08:15,020 --> 00:08:19,759
+download the zip file here alright and
+
+194
+00:08:19,759 --> 00:08:22,419
+let's go ahead and open that up and then
+
+195
+00:08:22,419 --> 00:08:25,280
+what we want to do is just create a
+
+196
+00:08:25,280 --> 00:08:27,979
+folder to work in and I'm just going to
+
+197
+00:08:27,979 --> 00:08:35,510
+call this our XJS sandbox alright and
+
+198
+00:08:35,510 --> 00:08:36,409
+then we're just going to bring
+
+199
+00:08:36,409 --> 00:08:41,510
+everything over alright and I'll go
+
+200
+00:08:41,510 --> 00:08:44,300
+through the files really quick it's
+
+201
+00:08:44,300 --> 00:08:46,970
+pretty simple we're using webpack along
+
+202
+00:08:46,970 --> 00:08:49,160
+with babel now if we look at the
+
+203
+00:08:49,160 --> 00:08:53,150
+package.json file you'll see that for
+
+204
+00:08:53,150 --> 00:08:54,649
+dependencies we
+
+205
+00:08:54,649 --> 00:08:57,610
+have bable bable core in bevel loader
+
+206
+00:08:57,610 --> 00:09:01,610
+also the preset to compile from es2015
+
+207
+00:09:01,610 --> 00:09:04,100
+because we want to be able to use the
+
+208
+00:09:04,100 --> 00:09:06,019
+latest javascript and then compile it
+
+209
+00:09:06,019 --> 00:09:09,800
+down to more compatible version and of
+
+210
+00:09:09,800 --> 00:09:11,329
+course web pack which is going to allow
+
+211
+00:09:11,329 --> 00:09:14,329
+us to use modules and so on and then our
+
+212
+00:09:14,329 --> 00:09:16,249
+regular dependencies of course we have
+
+213
+00:09:16,249 --> 00:09:17,959
+rxjs and then we're also going to use
+
+214
+00:09:17,959 --> 00:09:20,240
+jQuery so that we can easily select
+
+215
+00:09:20,240 --> 00:09:22,759
+elements all right so that's what will
+
+216
+00:09:22,759 --> 00:09:26,209
+be installed when we run npm install all
+
+217
+00:09:26,209 --> 00:09:28,579
+right and then we have a web pack config
+
+218
+00:09:28,579 --> 00:09:31,389
+file basically we're saying that our
+
+219
+00:09:31,389 --> 00:09:33,679
+javascript file we want to work with is
+
+220
+00:09:33,679 --> 00:09:37,519
+in the source folder fjs and when we run
+
+221
+00:09:37,519 --> 00:09:39,679
+web pack it will compile it into the
+
+222
+00:09:39,679 --> 00:09:42,230
+dist folder into a file called app
+
+223
+00:09:42,230 --> 00:09:45,439
+bundle j/s and that's what we'll include
+
+224
+00:09:45,439 --> 00:09:47,869
+in our HTML all right and then down here
+
+225
+00:09:47,869 --> 00:09:49,519
+we're just specifying that we want to
+
+226
+00:09:49,519 --> 00:09:51,889
+use babel and we want to use the es2015
+
+227
+00:09:51,889 --> 00:09:54,740
+preset all right so that's what's going
+
+228
+00:09:54,740 --> 00:09:58,369
+on there and that's pretty much it in
+
+229
+00:09:58,369 --> 00:10:00,439
+the source folder we have our app j/s
+
+230
+00:10:00,439 --> 00:10:02,389
+that's the main file we'll be working
+
+231
+00:10:02,389 --> 00:10:05,649
+with and yeah so i'm going to open up
+
+232
+00:10:05,649 --> 00:10:09,529
+sublime text and let's go ahead and add
+
+233
+00:10:09,529 --> 00:10:10,959
+this folder to
+
+234
+00:10:10,959 --> 00:10:14,929
+add this as a project okay so desktop
+
+235
+00:10:14,929 --> 00:10:17,929
+sandbox and there we go
+
+236
+00:10:17,929 --> 00:10:19,910
+alright so in the app j/s right now
+
+237
+00:10:19,910 --> 00:10:22,550
+we're just importing jQuery and we're
+
+238
+00:10:22,550 --> 00:10:25,370
+also importing rxjs and then we're just
+
+239
+00:10:25,370 --> 00:10:27,170
+doing a consult log so let's go ahead
+
+240
+00:10:27,170 --> 00:10:30,019
+and run npm install so i'm going to open
+
+241
+00:10:30,019 --> 00:10:33,379
+up a command line okay or open up your
+
+242
+00:10:33,379 --> 00:10:36,350
+command line or you went your linux
+
+243
+00:10:36,350 --> 00:10:38,240
+terminal Mac whatever you're using and
+
+244
+00:10:38,240 --> 00:10:48,830
+let's navigate to that folder
+
+245
+00:10:48,830 --> 00:10:51,000
+all right and we're going to go ahead
+
+246
+00:10:51,000 --> 00:10:59,550
+and run npm install and of course you
+
+247
+00:10:59,550 --> 00:11:01,890
+need to have no js' installed if you
+
+248
+00:11:01,890 --> 00:11:05,790
+don't just go to node.js org and go
+
+249
+00:11:05,790 --> 00:11:09,330
+ahead and download and install it all
+
+250
+00:11:09,330 --> 00:11:10,590
+right so you can see that it created the
+
+251
+00:11:10,590 --> 00:11:12,600
+node modules folder and it's now
+
+252
+00:11:12,600 --> 00:11:18,090
+installing the dependencies alright so
+
+253
+00:11:18,090 --> 00:11:20,960
+now that that's done we're going to
+
+254
+00:11:20,960 --> 00:11:24,360
+we're going to compile our JavaScript or
+
+255
+00:11:24,360 --> 00:11:25,980
+we're going to run web pack in watch
+
+256
+00:11:25,980 --> 00:11:35,160
+mode so let's run web pack - w and what
+
+257
+00:11:35,160 --> 00:11:37,110
+that will do is take that app.js file
+
+258
+00:11:37,110 --> 00:11:44,070
+and compile it into the dist folder okay
+
+259
+00:11:44,070 --> 00:11:46,020
+so if we look now we have a dist folder
+
+260
+00:11:46,020 --> 00:11:49,380
+with app bundle J s so that's the file
+
+261
+00:11:49,380 --> 00:11:52,290
+that is being included in the index file
+
+262
+00:11:52,290 --> 00:11:54,510
+if we open that up you'll see it's being
+
+263
+00:11:54,510 --> 00:11:57,780
+included right here now we're also going
+
+264
+00:11:57,780 --> 00:12:00,210
+to want to install live servers so that
+
+265
+00:12:00,210 --> 00:12:02,370
+we can run this in a server environment
+
+266
+00:12:02,370 --> 00:12:04,440
+so I'm going to open up another command
+
+267
+00:12:04,440 --> 00:12:09,110
+line
+
+268
+00:12:09,110 --> 00:12:21,910
+okay let's navigate to that folder
+
+269
+00:12:21,910 --> 00:12:24,680
+okay and let's install live server
+
+270
+00:12:24,680 --> 00:12:30,500
+globally so NPM install live server -
+
+271
+00:12:30,500 --> 00:12:38,120
+gee all right so now we should be able
+
+272
+00:12:38,120 --> 00:12:43,190
+to simply run NPM start and that will
+
+273
+00:12:43,190 --> 00:12:48,320
+open up the localhost port 8000 all
+
+274
+00:12:48,320 --> 00:12:49,700
+right you can see we're getting our
+
+275
+00:12:49,700 --> 00:12:52,160
+index page and if we open the console
+
+276
+00:12:52,160 --> 00:12:54,980
+with f12 you see that we have our XJS
+
+277
+00:12:54,980 --> 00:12:57,740
+boiler running so everything is now set
+
+278
+00:12:57,740 --> 00:13:00,590
+up and we're ready to start to code with
+
+279
+00:13:00,590 --> 00:13:04,750
+rxjs
+
+280
+00:13:04,750 --> 00:13:06,920
+alright guys so the first thing we're
+
+281
+00:13:06,920 --> 00:13:09,830
+going to do is we're going to create an
+
+282
+00:13:09,830 --> 00:13:12,980
+observable sequence from UI events okay
+
+283
+00:13:12,980 --> 00:13:15,290
+a couple different types of events so
+
+284
+00:13:15,290 --> 00:13:16,910
+first thing I'm going to do I have my
+
+285
+00:13:16,910 --> 00:13:20,210
+app.js file open and my index.html I'm
+
+286
+00:13:20,210 --> 00:13:22,820
+going to create a button all right I'm
+
+287
+00:13:22,820 --> 00:13:25,070
+going to get rid of this and let's say
+
+288
+00:13:25,070 --> 00:13:30,370
+button and we'll give it an ID of BTN
+
+289
+00:13:30,370 --> 00:13:34,910
+okay we'll say click save that and live
+
+290
+00:13:34,910 --> 00:13:37,190
+server will automatically reload which
+
+291
+00:13:37,190 --> 00:13:39,800
+is nice alright and we can get rid of
+
+292
+00:13:39,800 --> 00:13:42,770
+this console log and first thing we want
+
+293
+00:13:42,770 --> 00:13:44,720
+to do is create a variable for that
+
+294
+00:13:44,720 --> 00:13:47,980
+button so I'm going to say Const BTN
+
+295
+00:13:47,980 --> 00:13:51,050
+equals and this is where a jQuery comes
+
+296
+00:13:51,050 --> 00:13:56,270
+in we want the ID of BTN okay now what
+
+297
+00:13:56,270 --> 00:13:58,880
+we'll do is create a variable for the
+
+298
+00:13:58,880 --> 00:14:01,160
+observable and for the first stream so
+
+299
+00:14:01,160 --> 00:14:04,060
+let's say Const and we'll call it BTN
+
+300
+00:14:04,060 --> 00:14:07,520
+stream money sign now the money sign
+
+301
+00:14:07,520 --> 00:14:09,650
+isn't required but it is good practice
+
+302
+00:14:09,650 --> 00:14:11,690
+that way you know which of your
+
+303
+00:14:11,690 --> 00:14:14,330
+variables is an actual observable and
+
+304
+00:14:14,330 --> 00:14:17,180
+represents a stream all right so we're
+
+305
+00:14:17,180 --> 00:14:19,750
+going to set that to our X dot
+
+306
+00:14:19,750 --> 00:14:22,100
+observable and then we're going to use
+
+307
+00:14:22,100 --> 00:14:25,850
+the from event operator alright now this
+
+308
+00:14:25,850 --> 00:14:27,110
+is going to take in a couple parameters
+
+309
+00:14:27,110 --> 00:14:29,000
+first one is going to be the actual
+
+310
+00:14:29,000 --> 00:14:32,180
+element so BTN and the next one will be
+
+311
+00:14:32,180 --> 00:14:32,510
+the
+
+312
+00:14:32,510 --> 00:14:34,310
+type of event we want which is going to
+
+313
+00:14:34,310 --> 00:14:37,580
+be a click in this case alright so
+
+314
+00:14:37,580 --> 00:14:39,380
+that's all there is to creating an
+
+315
+00:14:39,380 --> 00:14:41,480
+observable ok we're creating it from the
+
+316
+00:14:41,480 --> 00:14:43,190
+event now what we need to do is
+
+317
+00:14:43,190 --> 00:14:46,220
+subscribe to it ok you need to subscribe
+
+318
+00:14:46,220 --> 00:14:50,360
+to observables so we're going to say BTN
+
+319
+00:14:50,360 --> 00:14:55,730
+Stream money sign dot subscribe alright
+
+320
+00:14:55,730 --> 00:14:59,120
+and then in here it's going to take in
+
+321
+00:14:59,120 --> 00:15:01,370
+three functions one is going to be to
+
+322
+00:15:01,370 --> 00:15:04,220
+return the stream of the data in the
+
+323
+00:15:04,220 --> 00:15:06,200
+stream the next one will be to return
+
+324
+00:15:06,200 --> 00:15:08,600
+any errors if there are any and the last
+
+325
+00:15:08,600 --> 00:15:10,700
+one will be will run when it's completed
+
+326
+00:15:10,700 --> 00:15:13,820
+if it does complete so let's go ahead
+
+327
+00:15:13,820 --> 00:15:18,290
+and put function and just going to put
+
+328
+00:15:18,290 --> 00:15:23,090
+this on another line alright now we can
+
+329
+00:15:23,090 --> 00:15:25,940
+pass in whatever we want for a variable
+
+330
+00:15:25,940 --> 00:15:28,010
+here I'm going to use e for event and
+
+331
+00:15:28,010 --> 00:15:30,710
+then what we'll do is just console dot
+
+332
+00:15:30,710 --> 00:15:33,200
+log and for now I'm just going to
+
+333
+00:15:33,200 --> 00:15:36,860
+console.log clicked alright and then
+
+334
+00:15:36,860 --> 00:15:39,880
+we're going to have another function
+
+335
+00:15:39,880 --> 00:15:44,960
+which will take in ever and this will
+
+336
+00:15:44,960 --> 00:15:46,550
+only run if there's some kind of error
+
+337
+00:15:46,550 --> 00:15:48,740
+okay we just want to console log it and
+
+338
+00:15:48,740 --> 00:15:51,110
+then the last one is for when it
+
+339
+00:15:51,110 --> 00:15:54,470
+completes and we're just going to
+
+340
+00:15:54,470 --> 00:15:59,980
+console dot log and I'll say completed
+
+341
+00:15:59,980 --> 00:16:02,540
+alright so let's go ahead and save that
+
+342
+00:16:02,540 --> 00:16:06,260
+and that should reload and then if I
+
+343
+00:16:06,260 --> 00:16:09,730
+click on it you'll see we get clicked ok
+
+344
+00:16:09,730 --> 00:16:12,830
+now obviously this isn't very helpful so
+
+345
+00:16:12,830 --> 00:16:15,800
+what we want to do is pass in that eval
+
+346
+00:16:15,800 --> 00:16:20,680
+you alright so let's save that and now
+
+347
+00:16:20,680 --> 00:16:24,260
+we click and you can see what we get
+
+348
+00:16:24,260 --> 00:16:27,470
+this this large object that has all
+
+349
+00:16:27,470 --> 00:16:29,330
+these values alright so you can kind of
+
+350
+00:16:29,330 --> 00:16:33,590
+look at you can look at elements as
+
+351
+00:16:33,590 --> 00:16:36,410
+having their own little mini database ok
+
+352
+00:16:36,410 --> 00:16:38,030
+with all these different values so you
+
+353
+00:16:38,030 --> 00:16:40,760
+can see we have the timestamp we have
+
+354
+00:16:40,760 --> 00:16:44,570
+the original event which if we open that
+
+355
+00:16:44,570 --> 00:16:46,220
+has a whole bunch of other stuff
+
+356
+00:16:46,220 --> 00:16:49,700
+if the target can see we can get the the
+
+357
+00:16:49,700 --> 00:16:53,270
+element and its ID we can get the class
+
+358
+00:16:53,270 --> 00:16:55,100
+name there isn't one but if there was we
+
+359
+00:16:55,100 --> 00:16:56,660
+could get that we can get the client
+
+360
+00:16:56,660 --> 00:17:01,220
+height client position the innerhtml
+
+361
+00:17:01,220 --> 00:17:04,040
+which is the text of the button the ID
+
+362
+00:17:04,040 --> 00:17:06,110
+we can get all this stuff so for
+
+363
+00:17:06,110 --> 00:17:08,540
+instance if we want to get what's in the
+
+364
+00:17:08,540 --> 00:17:15,130
+inner HTML we can say e dot target dot
+
+365
+00:17:15,130 --> 00:17:21,740
+inner HTML and we'll save that and you
+
+366
+00:17:21,740 --> 00:17:23,210
+can see now we're getting the click
+
+367
+00:17:23,210 --> 00:17:25,820
+alright if I was to change that to click
+
+368
+00:17:25,820 --> 00:17:31,310
+one and click we get click one all right
+
+369
+00:17:31,310 --> 00:17:34,400
+so just a way to get some of these event
+
+370
+00:17:34,400 --> 00:17:39,140
+values so now what I want to do is use a
+
+371
+00:17:39,140 --> 00:17:41,630
+different of kind of event so let's
+
+372
+00:17:41,630 --> 00:17:44,920
+create an input box a text box
+
+373
+00:17:44,920 --> 00:17:49,100
+okay so put let's just put a HR tag
+
+374
+00:17:49,100 --> 00:17:51,200
+there and then we'll say input type
+
+375
+00:17:51,200 --> 00:17:56,350
+equals text and we'll give it an ID of
+
+376
+00:17:56,350 --> 00:18:03,410
+input okay and whips don't want to do
+
+377
+00:18:03,410 --> 00:18:07,210
+that all right and then what we'll do is
+
+378
+00:18:07,210 --> 00:18:09,680
+in our app J s so let's create a
+
+379
+00:18:09,680 --> 00:18:12,800
+variable called input and we're going to
+
+380
+00:18:12,800 --> 00:18:16,700
+set that equal to jQuery and we want the
+
+381
+00:18:16,700 --> 00:18:19,580
+ID input all right and then what I'm
+
+382
+00:18:19,580 --> 00:18:21,320
+going to do is just copy this this
+
+383
+00:18:21,320 --> 00:18:25,090
+button stream and let's change it to
+
+384
+00:18:25,090 --> 00:18:29,470
+input stream and change this value to
+
+385
+00:18:29,470 --> 00:18:32,210
+input and then we're going to change the
+
+386
+00:18:32,210 --> 00:18:36,950
+actual event to key up all right and
+
+387
+00:18:36,950 --> 00:18:40,040
+then down here we'll replace that with
+
+388
+00:18:40,040 --> 00:18:43,490
+input okay now I should mention that the
+
+389
+00:18:43,490 --> 00:18:46,880
+only required the first function here is
+
+390
+00:18:46,880 --> 00:18:48,860
+the only required one we don't need to
+
+391
+00:18:48,860 --> 00:18:50,540
+do the error we don't need to do the
+
+392
+00:18:50,540 --> 00:18:52,700
+completed all right and you may have
+
+393
+00:18:52,700 --> 00:18:55,010
+noticed that the key of these events
+
+394
+00:18:55,010 --> 00:18:58,070
+don't fire off completed because they
+
+395
+00:18:58,070 --> 00:19:00,060
+don't complete you know if
+
+396
+00:19:00,060 --> 00:19:03,000
+if you have a click event you can keep
+
+397
+00:19:03,000 --> 00:19:04,650
+having click events it's not something
+
+398
+00:19:04,650 --> 00:19:08,910
+that ends such as an array or get
+
+399
+00:19:08,910 --> 00:19:10,590
+requests it's going to get some data and
+
+400
+00:19:10,590 --> 00:19:13,650
+then complete all right it's ongoing so
+
+401
+00:19:13,650 --> 00:19:16,290
+let's go ahead and we're going to just
+
+402
+00:19:16,290 --> 00:19:20,310
+get rid of this target in our HTML and
+
+403
+00:19:20,310 --> 00:19:24,150
+let's save that and now if I go and I
+
+404
+00:19:24,150 --> 00:19:26,640
+start to type you can see that every
+
+405
+00:19:26,640 --> 00:19:29,040
+time we type a character it brings up
+
+406
+00:19:29,040 --> 00:19:31,500
+that event ok so this is a constant
+
+407
+00:19:31,500 --> 00:19:36,180
+stream of data now if we want to let's
+
+408
+00:19:36,180 --> 00:19:37,980
+say we want to get the actual values
+
+409
+00:19:37,980 --> 00:19:40,290
+being typed in we can get that from
+
+410
+00:19:40,290 --> 00:19:46,290
+current target and value or is it right
+
+411
+00:19:46,290 --> 00:19:48,390
+here value all right so let's do that
+
+412
+00:19:48,390 --> 00:19:52,610
+we'll say console.log e dot current
+
+413
+00:19:52,610 --> 00:19:59,400
+target dot value and we'll save that and
+
+414
+00:19:59,400 --> 00:20:03,030
+now you'll see that as I type it'll give
+
+415
+00:20:03,030 --> 00:20:06,960
+us the value down in the console all
+
+416
+00:20:06,960 --> 00:20:08,640
+right and we can actually get this from
+
+417
+00:20:08,640 --> 00:20:15,340
+a target value too
+
+418
+00:20:15,340 --> 00:20:18,879
+all right so we're getting a constant
+
+419
+00:20:18,879 --> 00:20:21,669
+stream that is giving us whatever we
+
+420
+00:20:21,669 --> 00:20:24,669
+type into the input box and of course if
+
+421
+00:20:24,669 --> 00:20:27,039
+we wanted to we could output that in the
+
+422
+00:20:27,039 --> 00:20:30,309
+browser window in the body so if we
+
+423
+00:20:30,309 --> 00:20:33,999
+create an div here and let's give it an
+
+424
+00:20:33,999 --> 00:20:40,899
+ID of output okay we'll save that and
+
+425
+00:20:40,899 --> 00:20:47,820
+then we'll just create a variable for it
+
+426
+00:20:47,820 --> 00:20:56,309
+and then down here let's say output dot
+
+427
+00:20:56,309 --> 00:20:59,590
+append okay so now we're using jQuery
+
+428
+00:20:59,590 --> 00:21:05,730
+and we'll pass in a dot target dot value
+
+429
+00:21:05,730 --> 00:21:10,480
+so let's save that now if we go and
+
+430
+00:21:10,480 --> 00:21:12,340
+click in here and start to type you'll
+
+431
+00:21:12,340 --> 00:21:14,499
+see that it's going to output in the
+
+432
+00:21:14,499 --> 00:21:17,499
+browser all right so this works similar
+
+433
+00:21:17,499 --> 00:21:20,110
+to how angular 2 works with its data
+
+434
+00:21:20,110 --> 00:21:23,470
+binding so there's one more event that I
+
+435
+00:21:23,470 --> 00:21:24,610
+want to show you and that's the
+
+436
+00:21:24,610 --> 00:21:27,669
+mousemove event so let's go ahead and
+
+437
+00:21:27,669 --> 00:21:34,179
+grab this and let's change it to will
+
+438
+00:21:34,179 --> 00:21:39,490
+just say move stream and change this to
+
+439
+00:21:39,490 --> 00:21:41,590
+document because I want this to work on
+
+440
+00:21:41,590 --> 00:21:43,509
+the entire document and then we'll
+
+441
+00:21:43,509 --> 00:21:45,789
+change the event we're going to change
+
+442
+00:21:45,789 --> 00:21:50,559
+that to mouse move all right and then
+
+443
+00:21:50,559 --> 00:21:54,720
+down here let's just keep that as is
+
+444
+00:21:54,720 --> 00:21:56,710
+actually no we don't want to keep it as
+
+445
+00:21:56,710 --> 00:22:01,269
+is let's do output dot append and we
+
+446
+00:22:01,269 --> 00:22:04,299
+want the x and y values so we'll say X
+
+447
+00:22:04,299 --> 00:22:07,619
+and then we'll concatenate onto that e
+
+448
+00:22:07,619 --> 00:22:14,080
+dot client X all right and then we'll
+
+449
+00:22:14,080 --> 00:22:19,929
+say Y and then client Y all right so if
+
+450
+00:22:19,929 --> 00:22:25,500
+we save that and I go in the document
+
+451
+00:22:25,500 --> 00:22:28,059
+it's all we need to change this to move
+
+452
+00:22:28,059 --> 00:22:28,490
+straight
+
+453
+00:22:28,490 --> 00:22:33,320
+and it should be a dot client why so
+
+454
+00:22:33,320 --> 00:22:37,640
+let's save that and now as I move around
+
+455
+00:22:37,640 --> 00:22:38,960
+you'll see that to capture my
+
+456
+00:22:38,960 --> 00:22:41,270
+coordinates now I don't want this to
+
+457
+00:22:41,270 --> 00:22:43,040
+just keep adding to it I want it to
+
+458
+00:22:43,040 --> 00:22:45,560
+replace it every time it gets those
+
+459
+00:22:45,560 --> 00:22:48,800
+values so let's change I'll put a pen to
+
+460
+00:22:48,800 --> 00:22:53,170
+output I will say output dot HTML and
+
+461
+00:22:53,170 --> 00:23:03,560
+we'll add an h1 around these alright so
+
+462
+00:23:03,560 --> 00:23:07,310
+if we save that now when we move around
+
+463
+00:23:07,310 --> 00:23:09,110
+you'll see that it outputs in the
+
+464
+00:23:09,110 --> 00:23:11,210
+browser so it's a constant stream giving
+
+465
+00:23:11,210 --> 00:23:14,410
+us the this data this X&Y coordinates
+
+466
+00:23:14,410 --> 00:23:16,640
+all right so that's how we can create
+
+467
+00:23:16,640 --> 00:23:23,180
+observables from events alright so now
+
+468
+00:23:23,180 --> 00:23:24,380
+that I've showed you how to create
+
+469
+00:23:24,380 --> 00:23:26,300
+observables for events now I'm going to
+
+470
+00:23:26,300 --> 00:23:28,070
+show you how to create them from array
+
+471
+00:23:28,070 --> 00:23:30,530
+like objects all right so I've cleared
+
+472
+00:23:30,530 --> 00:23:33,080
+everything out and I will be I will post
+
+473
+00:23:33,080 --> 00:23:35,120
+the files on github and I'll add a link
+
+474
+00:23:35,120 --> 00:23:37,190
+in the description but I just clue I
+
+475
+00:23:37,190 --> 00:23:39,140
+cleared out everything from there and
+
+476
+00:23:39,140 --> 00:23:42,170
+also the index.html alright so what
+
+477
+00:23:42,170 --> 00:23:43,340
+we're going to do is we're going to
+
+478
+00:23:43,340 --> 00:23:51,380
+create a simple array of numbers all
+
+479
+00:23:51,380 --> 00:23:53,210
+right so we have these numbers and we
+
+480
+00:23:53,210 --> 00:23:55,130
+want to create an observable sequence
+
+481
+00:23:55,130 --> 00:23:58,580
+from these numbers so let's say Const
+
+482
+00:23:58,580 --> 00:24:02,380
+we'll call this numbers money sign and
+
+483
+00:24:02,380 --> 00:24:06,800
+set this to our X dot observable and
+
+484
+00:24:06,800 --> 00:24:09,920
+we're going to use the from operator all
+
+485
+00:24:09,920 --> 00:24:11,360
+right and then we'll just stick in their
+
+486
+00:24:11,360 --> 00:24:14,780
+numbers all right so we want to
+
+487
+00:24:14,780 --> 00:24:17,630
+subscribe to this observable so let's
+
+488
+00:24:17,630 --> 00:24:24,370
+say numbers money sign dot subscribe and
+
+489
+00:24:24,370 --> 00:24:27,410
+in the last video we just used our
+
+490
+00:24:27,410 --> 00:24:29,090
+callback functions now I'm going to show
+
+491
+00:24:29,090 --> 00:24:30,920
+you how to use arrow functions which is
+
+492
+00:24:30,920 --> 00:24:33,830
+just a different way to to add these
+
+493
+00:24:33,830 --> 00:24:37,610
+callbacks all right so let's say for the
+
+494
+00:24:37,610 --> 00:24:41,180
+the actual values we'll use V and we'll
+
+495
+00:24:41,180 --> 00:24:42,169
+set that to
+
+496
+00:24:42,169 --> 00:24:47,659
+Eero function - a code block all right
+
+497
+00:24:47,659 --> 00:24:49,249
+it's all preference you can do the other
+
+498
+00:24:49,249 --> 00:24:51,529
+way or you can use the arrow functions
+
+499
+00:24:51,529 --> 00:24:57,080
+so we'll say console dot log V alright
+
+500
+00:24:57,080 --> 00:24:58,639
+and then for the next one we'll say
+
+501
+00:24:58,639 --> 00:25:05,480
+error set that console dot log error
+
+502
+00:25:05,480 --> 00:25:07,960
+whoops
+
+503
+00:25:07,960 --> 00:25:17,389
+alright and then for our complete this
+
+504
+00:25:17,389 --> 00:25:21,109
+console dot log and we'll just put in
+
+505
+00:25:21,109 --> 00:25:24,859
+the string completed all right so let's
+
+506
+00:25:24,859 --> 00:25:26,899
+go ahead and save that and see what
+
+507
+00:25:26,899 --> 00:25:31,519
+happens so you'll see that it's taking
+
+508
+00:25:31,519 --> 00:25:35,179
+that array and it's outputting as an
+
+509
+00:25:35,179 --> 00:25:37,639
+observable sequence now notice with this
+
+510
+00:25:37,639 --> 00:25:39,440
+one we're actually getting completed we
+
+511
+00:25:39,440 --> 00:25:41,960
+didn't get that with from event because
+
+512
+00:25:41,960 --> 00:25:44,330
+the the events don't stop this however
+
+513
+00:25:44,330 --> 00:25:47,359
+is just a static array when it gets to
+
+514
+00:25:47,359 --> 00:25:49,749
+the end it's going to run the completed
+
+515
+00:25:49,749 --> 00:25:52,879
+all right now usually you'd probably be
+
+516
+00:25:52,879 --> 00:25:55,340
+working with some kind of data source
+
+517
+00:25:55,340 --> 00:25:58,820
+that that outputs Jason are an array of
+
+518
+00:25:58,820 --> 00:26:01,730
+JSON objects so let's do that I'll say
+
+519
+00:26:01,730 --> 00:26:05,749
+Const post and we'll set that to an
+
+520
+00:26:05,749 --> 00:26:12,669
+array and say the posts have a title and
+
+521
+00:26:12,669 --> 00:26:19,040
+a body
+
+522
+00:26:19,040 --> 00:26:21,420
+all right we'll add a couple more of
+
+523
+00:26:21,420 --> 00:26:33,360
+these all right so we have these posts
+
+524
+00:26:33,360 --> 00:26:36,890
+and then we're just going to say Const
+
+525
+00:26:36,890 --> 00:26:41,550
+we'll do post money sign equals our X
+
+526
+00:26:41,550 --> 00:26:46,380
+dot observable dot from and we'll paste
+
+527
+00:26:46,380 --> 00:26:49,350
+in here or we'll type in here posts and
+
+528
+00:26:49,350 --> 00:26:54,750
+I'm just going to copy this and change
+
+529
+00:26:54,750 --> 00:26:57,930
+that to posts and if we go ahead and
+
+530
+00:26:57,930 --> 00:27:02,160
+save that we're going to get the objects
+
+531
+00:27:02,160 --> 00:27:05,490
+okay which have a title and a body all
+
+532
+00:27:05,490 --> 00:27:07,020
+right now if we want to output this up
+
+533
+00:27:07,020 --> 00:27:08,760
+here we can do that pretty easily
+
+534
+00:27:08,760 --> 00:27:12,300
+let's do will say ul will give it an ID
+
+535
+00:27:12,300 --> 00:27:20,370
+of posts all right and that's it we'll
+
+536
+00:27:20,370 --> 00:27:23,880
+save it and then over here we'll go down
+
+537
+00:27:23,880 --> 00:27:25,800
+and we can even make this a little more
+
+538
+00:27:25,800 --> 00:27:29,280
+descriptive and say post and then let's
+
+539
+00:27:29,280 --> 00:27:39,020
+do the ID posts and say dot append and
+
+540
+00:27:39,020 --> 00:27:48,990
+here we'll put our allies let's do post
+
+541
+00:27:48,990 --> 00:27:52,080
+dot title all right and actually we'll
+
+542
+00:27:52,080 --> 00:27:59,190
+wrap that also in an h3 all right and
+
+543
+00:27:59,190 --> 00:28:01,760
+then after that let's put a paragraph
+
+544
+00:28:01,760 --> 00:28:07,860
+and then we'll just concatenate in there
+
+545
+00:28:07,860 --> 00:28:12,630
+post dot body all right so let's save
+
+546
+00:28:12,630 --> 00:28:24,390
+that and whoops we need to change that
+
+547
+00:28:24,390 --> 00:28:27,250
+and there we go so now we're grabbing
+
+548
+00:28:27,250 --> 00:28:29,410
+the objects and we're out putting the
+
+549
+00:28:29,410 --> 00:28:32,190
+the title on the body of each post
+
+550
+00:28:32,190 --> 00:28:35,290
+now we're not limited to just standard
+
+551
+00:28:35,290 --> 00:28:38,470
+arrays we can even use sets and maps so
+
+552
+00:28:38,470 --> 00:28:42,840
+let's just comment all this stuff out
+
+553
+00:28:42,840 --> 00:28:46,300
+all right and let's create a set now a
+
+554
+00:28:46,300 --> 00:28:48,970
+set is basically an array that can have
+
+555
+00:28:48,970 --> 00:28:52,870
+any type of data it can have strings or
+
+556
+00:28:52,870 --> 00:28:56,310
+numbers or objects so let's say Const
+
+557
+00:28:56,310 --> 00:29:01,080
+set and we'll set it to new set and
+
+558
+00:29:01,080 --> 00:29:04,620
+let's pass in here some brackets and
+
+559
+00:29:04,620 --> 00:29:09,880
+we'll put in a string put in a number
+
+560
+00:29:09,880 --> 00:29:18,760
+and put in an object all right and then
+
+561
+00:29:18,760 --> 00:29:20,500
+we can create a stream from that I'm
+
+562
+00:29:20,500 --> 00:29:24,180
+actually going to just copy this
+
+563
+00:29:24,180 --> 00:29:27,400
+alright let's change this to our set
+
+564
+00:29:27,400 --> 00:29:34,000
+stream it will pass in set change that
+
+565
+00:29:34,000 --> 00:29:37,270
+and let's get rid of this line and we'll
+
+566
+00:29:37,270 --> 00:29:39,280
+just console.log that and I'm just going
+
+567
+00:29:39,280 --> 00:29:42,940
+to change this back to V alright so
+
+568
+00:29:42,940 --> 00:29:46,030
+let's go ahead and save and now you can
+
+569
+00:29:46,030 --> 00:29:48,430
+see we get our string our number and
+
+570
+00:29:48,430 --> 00:29:51,430
+then our object and it also fires off
+
+571
+00:29:51,430 --> 00:29:53,470
+completed so that's how you can create
+
+572
+00:29:53,470 --> 00:29:56,110
+an observable from a set you can do the
+
+573
+00:29:56,110 --> 00:29:58,840
+same with map and a map is basically an
+
+574
+00:29:58,840 --> 00:30:03,130
+array of key value pairs so I'm going to
+
+575
+00:30:03,130 --> 00:30:05,230
+just paste this in and we'll change this
+
+576
+00:30:05,230 --> 00:30:10,990
+to map change that and inside our
+
+577
+00:30:10,990 --> 00:30:13,120
+brackets we'll set another pair of
+
+578
+00:30:13,120 --> 00:30:23,200
+brackets we'll say 1 2 3 4 and 5 6 ok
+
+579
+00:30:23,200 --> 00:30:28,440
+we'll change this to map
+
+580
+00:30:28,440 --> 00:30:35,830
+and save and now it outputs our key
+
+581
+00:30:35,830 --> 00:30:43,919
+value pairs so that is the from operator
+
+582
+00:30:43,919 --> 00:30:46,299
+all right so we've learned how to create
+
+583
+00:30:46,299 --> 00:30:49,059
+observable sequences from events and
+
+584
+00:30:49,059 --> 00:30:51,460
+from array like objects now I'm going to
+
+585
+00:30:51,460 --> 00:30:53,110
+show you how to create an observable
+
+586
+00:30:53,110 --> 00:30:55,750
+from scratch so I've cleared everything
+
+587
+00:30:55,750 --> 00:30:59,530
+out and we're going to create a variable
+
+588
+00:30:59,530 --> 00:31:03,220
+called source money sign and we're going
+
+589
+00:31:03,220 --> 00:31:09,400
+to set that to new rx dot observable all
+
+590
+00:31:09,400 --> 00:31:11,620
+right and then we're going to pass in
+
+591
+00:31:11,620 --> 00:31:12,790
+here I'm just going to use arrow
+
+592
+00:31:12,790 --> 00:31:14,860
+functions here we're going to use an
+
+593
+00:31:14,860 --> 00:31:20,590
+observer all right and then let's just
+
+594
+00:31:20,590 --> 00:31:26,500
+do a console dot log and we'll just say
+
+595
+00:31:26,500 --> 00:31:30,970
+creating observable all right so let's
+
+596
+00:31:30,970 --> 00:31:32,770
+leave that for now and subscribe to it
+
+597
+00:31:32,770 --> 00:31:38,650
+so source dot subscribe all right and
+
+598
+00:31:38,650 --> 00:31:43,559
+we're going to pass in here let's say
+
+599
+00:31:43,559 --> 00:31:53,169
+we'll use X console.log X and let's do
+
+600
+00:31:53,169 --> 00:32:07,440
+the other two
+
+601
+00:32:07,440 --> 00:32:20,230
+and complete okay so let's go ahead and
+
+602
+00:32:20,230 --> 00:32:25,150
+save that all right so we get creating
+
+603
+00:32:25,150 --> 00:32:27,400
+observable now this is just console
+
+604
+00:32:27,400 --> 00:32:29,170
+logging we're not actually emitting
+
+605
+00:32:29,170 --> 00:32:31,900
+values yet so if we want to emit a value
+
+606
+00:32:31,900 --> 00:32:34,620
+then we need to take that observer and
+
+607
+00:32:34,620 --> 00:32:39,730
+call dot next alright and if you've ever
+
+608
+00:32:39,730 --> 00:32:43,090
+used a JavaScript generator function
+
+609
+00:32:43,090 --> 00:32:45,340
+this is pretty similar so let's say
+
+610
+00:32:45,340 --> 00:32:48,870
+observer dot next and we'll just say
+
+611
+00:32:48,870 --> 00:32:52,270
+hello world all right so let's go ahead
+
+612
+00:32:52,270 --> 00:32:56,080
+and save that and you can see that we're
+
+613
+00:32:56,080 --> 00:32:58,450
+now emitting hello world if we want to
+
+614
+00:32:58,450 --> 00:33:00,670
+emit another value from the stream will
+
+615
+00:33:00,670 --> 00:33:05,200
+say observer dot next and we'll say
+
+616
+00:33:05,200 --> 00:33:10,930
+another value save it and we get another
+
+617
+00:33:10,930 --> 00:33:13,750
+value now just to show you that this is
+
+618
+00:33:13,750 --> 00:33:16,270
+in fact a stream that is constantly open
+
+619
+00:33:16,270 --> 00:33:20,980
+let's do a timeout we'll do set timeout
+
+620
+00:33:20,980 --> 00:33:26,850
+and pass in here just an arrow function
+
+621
+00:33:26,850 --> 00:33:35,590
+and we'll do observer dot next and we'll
+
+622
+00:33:35,590 --> 00:33:40,780
+say yet another value and let's set the
+
+623
+00:33:40,780 --> 00:33:44,170
+timeout here to three seconds so 3,000
+
+624
+00:33:44,170 --> 00:33:47,350
+milliseconds and we'll save it so we
+
+625
+00:33:47,350 --> 00:33:49,930
+should get the first two values and then
+
+626
+00:33:49,930 --> 00:33:52,510
+three seconds later it emits yet another
+
+627
+00:33:52,510 --> 00:33:54,700
+value so you can see that it's a it's an
+
+628
+00:33:54,700 --> 00:33:58,030
+open stream now notice that we didn't
+
+629
+00:33:58,030 --> 00:34:00,280
+get the completed and the reason for
+
+630
+00:34:00,280 --> 00:34:01,900
+that is because we actually have to make
+
+631
+00:34:01,900 --> 00:34:04,270
+the observer complete so we're going to
+
+632
+00:34:04,270 --> 00:34:07,240
+go right under the last next we did and
+
+633
+00:34:07,240 --> 00:34:10,040
+say observer
+
+634
+00:34:10,040 --> 00:34:16,190
+complete and we'll save that okay three
+
+635
+00:34:16,190 --> 00:34:19,550
+seconds later we're going to get that
+
+636
+00:34:19,550 --> 00:34:21,980
+value and then it completes now if I
+
+637
+00:34:21,980 --> 00:34:23,810
+were to put this complete outside of the
+
+638
+00:34:23,810 --> 00:34:25,669
+set timeout it would complete before
+
+639
+00:34:25,669 --> 00:34:27,890
+this run so you want to make sure if you
+
+640
+00:34:27,890 --> 00:34:29,210
+do something like this you want to
+
+641
+00:34:29,210 --> 00:34:31,570
+complete at the right at the right place
+
+642
+00:34:31,570 --> 00:34:35,060
+so now errors if we want to let's say
+
+643
+00:34:35,060 --> 00:34:36,890
+have some kind of conditional and if it
+
+644
+00:34:36,890 --> 00:34:39,050
+fails we want to set an error so we
+
+645
+00:34:39,050 --> 00:34:44,300
+could say observer dot error and in here
+
+646
+00:34:44,300 --> 00:34:49,010
+we'll say new error and you can put
+
+647
+00:34:49,010 --> 00:34:51,410
+whatever you want here to output will
+
+648
+00:34:51,410 --> 00:34:56,410
+just say error and we'll say something
+
+649
+00:34:56,410 --> 00:35:02,410
+went wrong all right so if we save it
+
+650
+00:35:02,410 --> 00:35:05,810
+you see we get our error now notice that
+
+651
+00:35:05,810 --> 00:35:08,570
+it doesn't complete when our error shows
+
+652
+00:35:08,570 --> 00:35:10,850
+up it just just kind of stops now if we
+
+653
+00:35:10,850 --> 00:35:12,410
+want we can make this a little more
+
+654
+00:35:12,410 --> 00:35:16,390
+user-friendly and we can add down here
+
+655
+00:35:16,390 --> 00:35:24,490
+dot catch and we can pass in here error
+
+656
+00:35:24,490 --> 00:35:29,600
+and we'll set that to rx dots observable
+
+657
+00:35:29,600 --> 00:35:33,290
+and use of now what of does is it just
+
+658
+00:35:33,290 --> 00:35:35,780
+takes whatever you pass in and use in
+
+659
+00:35:35,780 --> 00:35:38,360
+sets that as an observable all right so
+
+660
+00:35:38,360 --> 00:35:40,160
+it just takes in arguments and fires it
+
+661
+00:35:40,160 --> 00:35:42,200
+off as an observable so we're going to
+
+662
+00:35:42,200 --> 00:35:44,930
+pass in an error all right so now if we
+
+663
+00:35:44,930 --> 00:35:49,250
+save that we get our error but you can
+
+664
+00:35:49,250 --> 00:35:51,230
+see that it does in fact go on to
+
+665
+00:35:51,230 --> 00:35:53,420
+complete all right so just a more
+
+666
+00:35:53,420 --> 00:35:55,790
+friendly way of handling things handling
+
+667
+00:35:55,790 --> 00:35:59,470
+errors so that's how you can create a
+
+668
+00:35:59,470 --> 00:36:05,540
+observable from scratch alright so now
+
+669
+00:36:05,540 --> 00:36:07,400
+I'm going to show you how to create an
+
+670
+00:36:07,400 --> 00:36:09,530
+observable sequence out of a promise
+
+671
+00:36:09,530 --> 00:36:12,770
+okay a promise basically represents the
+
+672
+00:36:12,770 --> 00:36:15,160
+eventual result of an asynchronous
+
+673
+00:36:15,160 --> 00:36:18,650
+operation okay so it does something and
+
+674
+00:36:18,650 --> 00:36:23,120
+then it can get a return of value and it
+
+675
+00:36:23,120 --> 00:36:23,510
+can return
+
+676
+00:36:23,510 --> 00:36:26,870
+at a later time using dot then so let me
+
+677
+00:36:26,870 --> 00:36:28,370
+just give you an example of a really
+
+678
+00:36:28,370 --> 00:36:29,690
+simple promise
+
+679
+00:36:29,690 --> 00:36:34,490
+so we'll say Const my promise and we're
+
+680
+00:36:34,490 --> 00:36:39,500
+going to set that to new promise and in
+
+681
+00:36:39,500 --> 00:36:42,740
+here it'll take in a callback I'm just
+
+682
+00:36:42,740 --> 00:36:44,810
+going to use an arrow function so it'll
+
+683
+00:36:44,810 --> 00:36:51,890
+take resolve and reject all right and
+
+684
+00:36:51,890 --> 00:36:56,720
+then let's just do console dot log and
+
+685
+00:36:56,720 --> 00:37:04,550
+it'll say creating promise and we want
+
+686
+00:37:04,550 --> 00:37:07,220
+to run resolve and then return out value
+
+687
+00:37:07,220 --> 00:37:09,530
+so what I'm going to do is just do a set
+
+688
+00:37:09,530 --> 00:37:12,470
+timeout okay so usually you would have
+
+689
+00:37:12,470 --> 00:37:14,780
+some kind of asynchronous operation
+
+690
+00:37:14,780 --> 00:37:16,760
+happen but we're just going to set a
+
+691
+00:37:16,760 --> 00:37:21,590
+timeout and then we're going to call
+
+692
+00:37:21,590 --> 00:37:25,520
+resolve and we're going to emit some
+
+693
+00:37:25,520 --> 00:37:29,510
+kind of value we'll just say hello from
+
+694
+00:37:29,510 --> 00:37:32,000
+promise all right and we'll set the
+
+695
+00:37:32,000 --> 00:37:35,870
+timeout to three seconds so there's a
+
+696
+00:37:35,870 --> 00:37:38,840
+very simple promise now we could get it
+
+697
+00:37:38,840 --> 00:37:43,970
+by saying my promise dot then all right
+
+698
+00:37:43,970 --> 00:37:49,430
+and then inside then little console dot
+
+699
+00:37:49,430 --> 00:37:52,850
+log X so it works very similar to an
+
+700
+00:37:52,850 --> 00:37:56,650
+observable so let's save that and
+
+701
+00:37:56,650 --> 00:37:59,090
+creating promise in three seconds we
+
+702
+00:37:59,090 --> 00:38:02,300
+should get hello from promise all right
+
+703
+00:38:02,300 --> 00:38:04,190
+now if we want to take this and return
+
+704
+00:38:04,190 --> 00:38:07,460
+as an observable let's let's comment
+
+705
+00:38:07,460 --> 00:38:16,430
+this out and we'll do Const source our X
+
+706
+00:38:16,430 --> 00:38:18,440
+dot observable and then we want to use
+
+707
+00:38:18,440 --> 00:38:22,040
+the from promise operator all right and
+
+708
+00:38:22,040 --> 00:38:25,210
+then we can pass in my promise
+
+709
+00:38:25,210 --> 00:38:28,430
+so now let's subscribe to it don't say
+
+710
+00:38:28,430 --> 00:38:30,160
+source
+
+711
+00:38:30,160 --> 00:38:39,099
+dot subscribe and let's just do console
+
+712
+00:38:39,099 --> 00:38:46,390
+dot log X okay so let's save it and then
+
+713
+00:38:46,390 --> 00:38:50,229
+we should get the same result okay three
+
+714
+00:38:50,229 --> 00:38:53,789
+seconds later we get hello from promise
+
+715
+00:38:53,789 --> 00:38:56,049
+all right so let's do something a little
+
+716
+00:38:56,049 --> 00:38:58,539
+more useful what I want to do is I'm
+
+717
+00:38:58,539 --> 00:39:02,200
+going to send it an ajax request to the
+
+718
+00:39:02,200 --> 00:39:05,170
+github api to get some information on a
+
+719
+00:39:05,170 --> 00:39:07,539
+user so I'm going to first create a
+
+720
+00:39:07,539 --> 00:39:10,749
+function called get user alright and
+
+721
+00:39:10,749 --> 00:39:12,579
+this is actually from the edge' wanax
+
+722
+00:39:12,579 --> 00:39:14,920
+course this is going to be a much
+
+723
+00:39:14,920 --> 00:39:17,259
+lighter version of that in the course we
+
+724
+00:39:17,259 --> 00:39:18,819
+actually create a kind of a mini
+
+725
+00:39:18,819 --> 00:39:21,039
+application and make it look really nice
+
+726
+00:39:21,039 --> 00:39:23,349
+but this is going to be just really
+
+727
+00:39:23,349 --> 00:39:25,890
+quick so I'm going to say get user
+
+728
+00:39:25,890 --> 00:39:28,210
+username and then we want to return
+
+729
+00:39:28,210 --> 00:39:31,690
+we're going to use jQuery and use the
+
+730
+00:39:31,690 --> 00:39:37,710
+Ajax method here and let's pass in a URL
+
+731
+00:39:37,710 --> 00:39:42,160
+which is going to be HTTP API dot
+
+732
+00:39:42,160 --> 00:39:47,829
+github.com slash users slash and then
+
+733
+00:39:47,829 --> 00:39:50,549
+we'll just concatenate the user name
+
+734
+00:39:50,549 --> 00:39:53,200
+alright and then we also want a data
+
+735
+00:39:53,200 --> 00:39:56,769
+type alright and since we're on a
+
+736
+00:39:56,769 --> 00:39:58,979
+different domain we're going to use
+
+737
+00:39:58,979 --> 00:40:02,019
+JSONP as our data type now we want this
+
+738
+00:40:02,019 --> 00:40:04,089
+returned as a promise so we can use dot
+
+739
+00:40:04,089 --> 00:40:11,440
+promise and now let's go down here and
+
+740
+00:40:11,440 --> 00:40:17,289
+we're going to say Const so let's not
+
+741
+00:40:17,289 --> 00:40:18,789
+even put it in a variable we'll just do
+
+742
+00:40:18,789 --> 00:40:24,960
+our X dot observable dot from promise
+
+743
+00:40:24,960 --> 00:40:28,109
+okay and we're going to pass in here
+
+744
+00:40:28,109 --> 00:40:31,830
+that function get user
+
+745
+00:40:31,830 --> 00:40:34,200
+all right and for the username we'll
+
+746
+00:40:34,200 --> 00:40:41,250
+just pass in my username all right and
+
+747
+00:40:41,250 --> 00:40:42,960
+we can actually just subscribe to it
+
+748
+00:40:42,960 --> 00:40:45,930
+like this I've been using variables but
+
+749
+00:40:45,930 --> 00:40:47,900
+you can do it this way
+
+750
+00:40:47,900 --> 00:40:52,280
+so we'll say dot subscribe and let's do
+
+751
+00:40:52,280 --> 00:40:54,050
+console
+
+752
+00:40:54,050 --> 00:40:59,640
+I'm not console we want to do X let's
+
+753
+00:40:59,640 --> 00:41:07,560
+see X and then console dot log X all
+
+754
+00:41:07,560 --> 00:41:09,690
+right so let's see what that gives us
+
+755
+00:41:09,690 --> 00:41:13,860
+we'll save it and you can see we get
+
+756
+00:41:13,860 --> 00:41:18,030
+this object it has data and data object
+
+757
+00:41:18,030 --> 00:41:20,310
+and meta so if we open up data you can
+
+758
+00:41:20,310 --> 00:41:21,300
+see that we're getting all this
+
+759
+00:41:21,300 --> 00:41:24,380
+information about this github user and
+
+760
+00:41:24,380 --> 00:41:27,120
+we can grab this and put it in our HTML
+
+761
+00:41:27,120 --> 00:41:30,690
+if we want so let's do I will say h1
+
+762
+00:41:30,690 --> 00:41:37,200
+give it an ID of name and let's say we
+
+763
+00:41:37,200 --> 00:41:43,500
+want to get let's see we'll get the the
+
+764
+00:41:43,500 --> 00:41:47,840
+blog URL right here so we can do
+
+765
+00:41:47,840 --> 00:41:55,790
+we'll say ul Li with the ID of blog and
+
+766
+00:41:55,790 --> 00:41:58,680
+then let's also get the public the
+
+767
+00:41:58,680 --> 00:42:02,010
+number of repos so we'll put an li give
+
+768
+00:42:02,010 --> 00:42:09,300
+it an ID of repos all right so let's go
+
+769
+00:42:09,300 --> 00:42:13,050
+ahead and save that and then in our app
+
+770
+00:42:13,050 --> 00:42:23,410
+J s we'll go down here and let's do
+
+771
+00:42:23,410 --> 00:42:28,619
+what was that name and we'll say dots
+
+772
+00:42:28,619 --> 00:42:33,099
+text and we want that x value and then
+
+773
+00:42:33,099 --> 00:42:34,900
+it has a data object so we want to say
+
+774
+00:42:34,900 --> 00:42:44,800
+dot data and then dot name all right and
+
+775
+00:42:44,800 --> 00:42:49,180
+then we'll do the blog so that's data
+
+776
+00:42:49,180 --> 00:42:59,830
+dot blog and then the public repos all
+
+777
+00:42:59,830 --> 00:43:03,310
+right and let's just add some text in
+
+778
+00:43:03,310 --> 00:43:10,090
+here to will say public repos all right
+
+779
+00:43:10,090 --> 00:43:14,619
+so save that and there we go so we're
+
+780
+00:43:14,619 --> 00:43:16,060
+pulling out the name we're pulling out
+
+781
+00:43:16,060 --> 00:43:19,750
+the blog URL and that should actually be
+
+782
+00:43:19,750 --> 00:43:26,380
+public repos public underscore repos all
+
+783
+00:43:26,380 --> 00:43:29,530
+right now let's do something a little
+
+784
+00:43:29,530 --> 00:43:31,000
+more interesting we're going to create
+
+785
+00:43:31,000 --> 00:43:33,460
+an input form where we can change the
+
+786
+00:43:33,460 --> 00:43:37,540
+user name and have that output I'll put
+
+787
+00:43:37,540 --> 00:43:40,330
+the result as a stream so we'll go to
+
+788
+00:43:40,330 --> 00:43:44,010
+our HTML and let's put in up here and
+
+789
+00:43:44,010 --> 00:43:49,380
+input give it a type of text and an ID
+
+790
+00:43:49,380 --> 00:43:55,150
+of input all right so I'm going to go
+
+791
+00:43:55,150 --> 00:43:58,089
+right above this and we're going to
+
+792
+00:43:58,089 --> 00:44:03,690
+create a variable called input source
+
+793
+00:44:03,690 --> 00:44:07,380
+okay we'll set that to our X dot
+
+794
+00:44:07,380 --> 00:44:09,460
+observable and we're going to use from
+
+795
+00:44:09,460 --> 00:44:15,400
+event okay and for the selector we'll
+
+796
+00:44:15,400 --> 00:44:18,040
+just use our jQuery here and say input
+
+797
+00:44:18,040 --> 00:44:23,140
+and then the event itself we're going to
+
+798
+00:44:23,140 --> 00:44:25,780
+do key up all right so now let's
+
+799
+00:44:25,780 --> 00:44:38,319
+subscribe to that
+
+800
+00:44:38,319 --> 00:44:45,380
+all right and in here we'll go like that
+
+801
+00:44:45,380 --> 00:44:53,959
+and then we'll just copy this or we'll
+
+802
+00:44:53,959 --> 00:44:56,329
+cut it rather and paste it right in
+
+803
+00:44:56,329 --> 00:44:58,759
+there and then instead of passing in
+
+804
+00:44:58,759 --> 00:45:01,400
+just a static username we're going to
+
+805
+00:45:01,400 --> 00:45:06,259
+pass in here e dot target dot value so
+
+806
+00:45:06,259 --> 00:45:10,789
+whatever we type in the input now I do
+
+807
+00:45:10,789 --> 00:45:13,539
+want you to note that doing this this
+
+808
+00:45:13,539 --> 00:45:16,489
+double subscribe here and here isn't
+
+809
+00:45:16,489 --> 00:45:18,920
+really the way you want you would want
+
+810
+00:45:18,920 --> 00:45:20,449
+to do this you want to use something
+
+811
+00:45:20,449 --> 00:45:22,999
+like merge map or switch map but I'm not
+
+812
+00:45:22,999 --> 00:45:24,739
+going to get into that now so for now
+
+813
+00:45:24,739 --> 00:45:25,959
+we're going to leave it like this
+
+814
+00:45:25,959 --> 00:45:28,400
+alright we'll do that later so let's go
+
+815
+00:45:28,400 --> 00:45:32,809
+ahead and save that and now as I type it
+
+816
+00:45:32,809 --> 00:45:36,799
+should fetch the data wait a minute he
+
+817
+00:45:36,799 --> 00:45:38,299
+is not defined
+
+818
+00:45:38,299 --> 00:45:45,079
+oh let's change that to E all right so
+
+819
+00:45:45,079 --> 00:45:49,309
+save that and then I put a B in and
+
+820
+00:45:49,309 --> 00:45:51,349
+that's what's going to come back for the
+
+821
+00:45:51,349 --> 00:45:54,619
+username B from the github API if we put
+
+822
+00:45:54,619 --> 00:45:57,109
+Brad and that's Brad pitcher we get and
+
+823
+00:45:57,109 --> 00:46:00,559
+as I type mine when we get to it my name
+
+824
+00:46:00,559 --> 00:46:03,819
+shows up all right so it's very dynamic
+
+825
+00:46:03,819 --> 00:46:07,670
+and in the full course we do this but we
+
+826
+00:46:07,670 --> 00:46:09,739
+actually build out a nice interface that
+
+827
+00:46:09,739 --> 00:46:12,979
+uses bootstrap that uses the Avatar and
+
+828
+00:46:12,979 --> 00:46:15,859
+all that stuff all right so that's going
+
+829
+00:46:15,859 --> 00:46:19,489
+to be it for promises in the next video
+
+830
+00:46:19,489 --> 00:46:20,630
+we're going to take a look at some
+
+831
+00:46:20,630 --> 00:46:22,039
+operators we're going to look at
+
+832
+00:46:22,039 --> 00:46:29,660
+interval timer and range all right so
+
+833
+00:46:29,660 --> 00:46:31,219
+we're going to take a look at interval
+
+834
+00:46:31,219 --> 00:46:33,380
+timer and range okay and these are
+
+835
+00:46:33,380 --> 00:46:36,949
+really helpful for just testing and just
+
+836
+00:46:36,949 --> 00:46:39,349
+learning in general all right so we'll
+
+837
+00:46:39,349 --> 00:46:40,999
+start with interval and what this does
+
+838
+00:46:40,999 --> 00:46:43,770
+is it returns an observable sequence
+
+839
+00:46:43,770 --> 00:46:46,740
+that produces a value after each period
+
+840
+00:46:46,740 --> 00:46:48,690
+all right so let me give you a quick
+
+841
+00:46:48,690 --> 00:46:52,890
+example so we'll create a variable
+
+842
+00:46:52,890 --> 00:46:57,780
+called source and let's set it to our X
+
+843
+00:46:57,780 --> 00:47:03,840
+dot observable dot interval alright and
+
+844
+00:47:03,840 --> 00:47:05,609
+this is going to take in one parameter
+
+845
+00:47:05,609 --> 00:47:08,190
+which is going to be the length of time
+
+846
+00:47:08,190 --> 00:47:11,400
+between each emission all right so let's
+
+847
+00:47:11,400 --> 00:47:14,190
+say one second 1000 milliseconds and
+
+848
+00:47:14,190 --> 00:47:24,900
+then we'll subscribe to that okay and
+
+849
+00:47:24,900 --> 00:47:29,720
+we're going to pass in here X and
+
+850
+00:47:29,720 --> 00:47:35,849
+console dot log X all right so let's go
+
+851
+00:47:35,849 --> 00:47:41,280
+ahead and run that and you can see that
+
+852
+00:47:41,280 --> 00:47:43,200
+it waits a second then it starts firing
+
+853
+00:47:43,200 --> 00:47:46,680
+these off from 0 up and it's going to be
+
+854
+00:47:46,680 --> 00:47:49,680
+a second in between each emission all
+
+855
+00:47:49,680 --> 00:47:51,359
+right if I were to change this to let's
+
+856
+00:47:51,359 --> 00:47:56,550
+say three we'll save that and now the
+
+857
+00:47:56,550 --> 00:48:01,640
+interval will be three seconds apart
+
+858
+00:48:01,640 --> 00:48:06,210
+okay now this will just keep going on
+
+859
+00:48:06,210 --> 00:48:10,500
+forever if you want to specify specify
+
+860
+00:48:10,500 --> 00:48:12,150
+an end point we could use the take
+
+861
+00:48:12,150 --> 00:48:16,230
+operator so we'll say take I will say
+
+862
+00:48:16,230 --> 00:48:18,960
+take five okay we'll run it at let's do
+
+863
+00:48:18,960 --> 00:48:20,640
+a hundred milliseconds so that'll be
+
+864
+00:48:20,640 --> 00:48:25,530
+even faster alright so you can see that
+
+865
+00:48:25,530 --> 00:48:27,900
+it goes from zero to four now we put
+
+866
+00:48:27,900 --> 00:48:30,270
+five in but it only goes to four because
+
+867
+00:48:30,270 --> 00:48:32,900
+it's zero based okay so it gets five
+
+868
+00:48:32,900 --> 00:48:37,380
+five values and let's actually put our
+
+869
+00:48:37,380 --> 00:49:06,630
+error and complete functions as well
+
+870
+00:49:06,630 --> 00:49:09,040
+all right so let's try running that
+
+871
+00:49:09,040 --> 00:49:12,880
+again and you see that we do get a
+
+872
+00:49:12,880 --> 00:49:15,190
+completed at the end all right if we
+
+873
+00:49:15,190 --> 00:49:16,900
+don't if we didn't use take it would
+
+874
+00:49:16,900 --> 00:49:20,020
+just keep going it wouldn't complete all
+
+875
+00:49:20,020 --> 00:49:22,270
+right so the next one I want to look at
+
+876
+00:49:22,270 --> 00:49:24,760
+is timer so I'm going to just copy this
+
+877
+00:49:24,760 --> 00:49:30,360
+whole thing and let's comment it out
+
+878
+00:49:30,360 --> 00:49:35,680
+okay so we'll change this to timer so
+
+879
+00:49:35,680 --> 00:49:38,680
+this will emit one particular item after
+
+880
+00:49:38,680 --> 00:49:41,710
+span of time that we specify so let's
+
+881
+00:49:41,710 --> 00:49:47,110
+put in here 1000 and 1000 and we'll see
+
+882
+00:49:47,110 --> 00:49:52,480
+what that gives us okay so that's
+
+883
+00:49:52,480 --> 00:49:54,400
+basically going to work how interval
+
+884
+00:49:54,400 --> 00:50:00,430
+works okay we can set the time from when
+
+885
+00:50:00,430 --> 00:50:03,010
+the page loads to when it starts so if
+
+886
+00:50:03,010 --> 00:50:05,800
+we want to say five seconds and then the
+
+887
+00:50:05,800 --> 00:50:08,350
+time from in between each one we say two
+
+888
+00:50:08,350 --> 00:50:13,540
+seconds and we save that now it's not
+
+889
+00:50:13,540 --> 00:50:15,670
+going to start for five seconds and then
+
+890
+00:50:15,670 --> 00:50:17,950
+when it does it's going to wait two
+
+891
+00:50:17,950 --> 00:50:20,800
+seconds in between each one all right so
+
+892
+00:50:20,800 --> 00:50:23,830
+very similar to interval and then the
+
+893
+00:50:23,830 --> 00:50:27,940
+last one I want to look at is range so
+
+894
+00:50:27,940 --> 00:50:31,590
+we'll go ahead and copy this
+
+895
+00:50:31,590 --> 00:50:36,700
+okay we'll change this to range and we
+
+896
+00:50:36,700 --> 00:50:39,130
+don't need to take five on this because
+
+897
+00:50:39,130 --> 00:50:42,370
+we actually set a start and stop part so
+
+898
+00:50:42,370 --> 00:50:44,890
+we're going to say start at zero and go
+
+899
+00:50:44,890 --> 00:50:48,370
+five five values up all right so let's
+
+900
+00:50:48,370 --> 00:50:52,570
+save it okay and you can see that it all
+
+901
+00:50:52,570 --> 00:50:56,380
+gets emitted at once and it completes so
+
+902
+00:50:56,380 --> 00:50:57,700
+if we were to set the
+
+903
+00:50:57,700 --> 00:51:07,080
+from let's say 25 and then 100 save that
+
+904
+00:51:07,080 --> 00:51:10,210
+okay so what it does is it starts at 25
+
+905
+00:51:10,210 --> 00:51:13,570
+and then goes 100 from that so that gets
+
+906
+00:51:13,570 --> 00:51:16,540
+all the way up to 124 and then it
+
+907
+00:51:16,540 --> 00:51:20,320
+completes all right so very simple but
+
+908
+00:51:20,320 --> 00:51:22,810
+as you'll see as we move along and if
+
+909
+00:51:22,810 --> 00:51:25,840
+you take the course these are very
+
+910
+00:51:25,840 --> 00:51:29,530
+valuable in terms of development testing
+
+911
+00:51:29,530 --> 00:51:36,010
+and learning all right so now we're
+
+912
+00:51:36,010 --> 00:51:39,100
+going to take a look at a really useful
+
+913
+00:51:39,100 --> 00:51:41,380
+and common operator and that's map
+
+914
+00:51:41,380 --> 00:51:43,210
+alright we'll also look at pluck which
+
+915
+00:51:43,210 --> 00:51:47,140
+is kind of a simpler version of map so
+
+916
+00:51:47,140 --> 00:51:49,750
+what map does is it applies a function
+
+917
+00:51:49,750 --> 00:51:52,360
+to each item that's emitted by the
+
+918
+00:51:52,360 --> 00:51:55,240
+source observable and it returns an
+
+919
+00:51:55,240 --> 00:51:58,720
+observable that emits the results of the
+
+920
+00:51:58,720 --> 00:52:01,210
+of that function okay so we can
+
+921
+00:52:01,210 --> 00:52:03,490
+essentially take any of the data that's
+
+922
+00:52:03,490 --> 00:52:06,550
+emitted and just manipulate it in many
+
+923
+00:52:06,550 --> 00:52:07,570
+different ways
+
+924
+00:52:07,570 --> 00:52:09,280
+alright so let's do a simple example
+
+925
+00:52:09,280 --> 00:52:12,580
+here we're going to create a variable
+
+926
+00:52:12,580 --> 00:52:17,500
+called source and let's set that to our
+
+927
+00:52:17,500 --> 00:52:23,980
+X dot observable dot interval okay and
+
+928
+00:52:23,980 --> 00:52:26,410
+for the interval let's say one second
+
+929
+00:52:26,410 --> 00:52:32,490
+and then we'll take source and subscribe
+
+930
+00:52:32,490 --> 00:52:35,520
+alright and in here
+
+931
+00:52:35,520 --> 00:52:40,960
+let's see you know what let's some no
+
+932
+00:52:40,960 --> 00:52:41,560
+that's fine
+
+933
+00:52:41,560 --> 00:52:44,580
+so we're going to take that value and
+
+934
+00:52:44,580 --> 00:52:49,670
+just console.log it
+
+935
+00:52:49,670 --> 00:52:53,660
+okay so let's also add a take here so it
+
+936
+00:52:53,660 --> 00:52:55,040
+doesn't go on forever
+
+937
+00:52:55,040 --> 00:53:02,690
+we'll say dot take ten all right so save
+
+938
+00:53:02,690 --> 00:53:06,319
+that and then it's just going to start
+
+939
+00:53:06,319 --> 00:53:08,839
+at zero and every one second go to ten
+
+940
+00:53:08,839 --> 00:53:11,599
+okay so we already understand that now
+
+941
+00:53:11,599 --> 00:53:13,790
+let's say that we want to take each
+
+942
+00:53:13,790 --> 00:53:18,680
+value and we want to double it all right
+
+943
+00:53:18,680 --> 00:53:21,589
+so what we could do is up here we'll say
+
+944
+00:53:21,589 --> 00:53:26,079
+dot map actually let's put it after take
+
+945
+00:53:26,079 --> 00:53:32,150
+okay we'll say dot map and here we'll
+
+946
+00:53:32,150 --> 00:53:37,460
+pass in V and we'll set that to a code
+
+947
+00:53:37,460 --> 00:53:40,099
+block and actually we'll keep it on this
+
+948
+00:53:40,099 --> 00:53:42,349
+line so we don't need a code block we'll
+
+949
+00:53:42,349 --> 00:53:47,119
+just save V multiplied by V all right so
+
+950
+00:53:47,119 --> 00:53:52,900
+now let's save it and we get zero one
+
+951
+00:53:52,900 --> 00:53:57,619
+four nine sixteen so what actually I
+
+952
+00:53:57,619 --> 00:53:59,020
+said double but we're actually
+
+953
+00:53:59,020 --> 00:54:01,819
+multiplying it by itself all right if we
+
+954
+00:54:01,819 --> 00:54:03,950
+wanted to double it then we would times
+
+955
+00:54:03,950 --> 00:54:10,150
+it by two and we get we should get two
+
+956
+00:54:10,150 --> 00:54:14,030
+four six eight so on alright so we can
+
+957
+00:54:14,030 --> 00:54:16,520
+manipulate the data however we want all
+
+958
+00:54:16,520 --> 00:54:17,839
+right let's take a look at an example
+
+959
+00:54:17,839 --> 00:54:27,040
+that's not math all right so let's say
+
+960
+00:54:27,040 --> 00:54:29,500
+Const
+
+961
+00:54:29,500 --> 00:54:35,240
+source is going to equal rx doc
+
+962
+00:54:35,240 --> 00:54:39,950
+observable and let's do from okay so
+
+963
+00:54:39,950 --> 00:54:42,049
+we're going to do it from an array so
+
+964
+00:54:42,049 --> 00:54:43,670
+I'm going to pass in just an array of
+
+965
+00:54:43,670 --> 00:54:53,240
+names John Tom and Sean okay so we have
+
+966
+00:54:53,240 --> 00:54:57,109
+these names and let's stop it there and
+
+967
+00:54:57,109 --> 00:55:03,190
+then we'll just subscribe to it
+
+968
+00:55:03,190 --> 00:55:09,530
+okay we'll just pass in V and we'll just
+
+969
+00:55:09,530 --> 00:55:17,330
+do console dot log V okay so obviously
+
+970
+00:55:17,330 --> 00:55:19,490
+that's just going to give us this this
+
+971
+00:55:19,490 --> 00:55:21,940
+array of names as an observable sequence
+
+972
+00:55:21,940 --> 00:55:25,730
+now let's say we want to make all these
+
+973
+00:55:25,730 --> 00:55:28,700
+names uppercase so what we could do is
+
+974
+00:55:28,700 --> 00:55:36,520
+add on to it dot map and let's set the
+
+975
+00:55:36,520 --> 00:55:42,970
+and we'll set it to V dot to uppercase
+
+976
+00:55:42,970 --> 00:55:47,120
+all right let's save it okay so it will
+
+977
+00:55:47,120 --> 00:55:48,920
+reload and now you can see that all the
+
+978
+00:55:48,920 --> 00:55:51,380
+names are uppercase now we're not
+
+979
+00:55:51,380 --> 00:55:53,510
+limited to just having one map we can
+
+980
+00:55:53,510 --> 00:55:55,400
+add as many as we want so let's add
+
+981
+00:55:55,400 --> 00:55:59,420
+another one and in this one let's just
+
+982
+00:55:59,420 --> 00:56:02,810
+add the text I am before each name so
+
+983
+00:56:02,810 --> 00:56:10,220
+we'll say map V and let's set that to a
+
+984
+00:56:10,220 --> 00:56:13,850
+string we'll say I am and then we'll
+
+985
+00:56:13,850 --> 00:56:20,480
+concatenate on V okay so save that and
+
+986
+00:56:20,480 --> 00:56:24,010
+now we get I am John Tom and Sean
+
+987
+00:56:24,010 --> 00:56:26,360
+alright so we can have as many maps as
+
+988
+00:56:26,360 --> 00:56:29,420
+we want alright let's take a look at
+
+989
+00:56:29,420 --> 00:56:31,100
+another example I'm going to use the
+
+990
+00:56:31,100 --> 00:56:34,010
+github function that we used in the
+
+991
+00:56:34,010 --> 00:56:36,680
+promises section so I'm going to paste
+
+992
+00:56:36,680 --> 00:56:38,780
+this in so we have our get github user
+
+993
+00:56:38,780 --> 00:56:41,180
+returning a promise we're using from
+
+994
+00:56:41,180 --> 00:56:43,520
+promise and we're subscribed we're
+
+995
+00:56:43,520 --> 00:56:46,220
+getting this user okay so let's see what
+
+996
+00:56:46,220 --> 00:56:49,460
+that gives us okay so it just gives us
+
+997
+00:56:49,460 --> 00:56:52,850
+an object which has a data object which
+
+998
+00:56:52,850 --> 00:56:55,520
+then has the user information all right
+
+999
+00:56:55,520 --> 00:56:58,250
+so if we wanted to we could add a map
+
+1000
+00:56:58,250 --> 00:57:06,050
+here so if we say dot map and then we'll
+
+1001
+00:57:06,050 --> 00:57:11,480
+say user and we could set that to user
+
+1002
+00:57:11,480 --> 00:57:13,730
+dot data
+
+1003
+00:57:13,730 --> 00:57:15,140
+and that way you could actually get rid
+
+1004
+00:57:15,140 --> 00:57:20,080
+of that data object so if we save that
+
+1005
+00:57:20,080 --> 00:57:23,510
+it'll pass us the actual object now if
+
+1006
+00:57:23,510 --> 00:57:25,190
+we want to be more specific let's say we
+
+1007
+00:57:25,190 --> 00:57:27,470
+just wanted the name out of this we
+
+1008
+00:57:27,470 --> 00:57:32,900
+could go ahead and say name set that to
+
+1009
+00:57:32,900 --> 00:57:36,560
+user dot data name and we could create
+
+1010
+00:57:36,560 --> 00:57:39,170
+that change this to name you don't have
+
+1011
+00:57:39,170 --> 00:57:44,320
+to but it's more descriptive and save it
+
+1012
+00:57:44,320 --> 00:57:47,980
+and let's say user not defined also
+
+1013
+00:57:47,980 --> 00:57:50,300
+actually you know what this should stay
+
+1014
+00:57:50,300 --> 00:57:56,690
+user so we'll save that and now we just
+
+1015
+00:57:56,690 --> 00:58:00,020
+get the name so now let's take a quick
+
+1016
+00:58:00,020 --> 00:58:03,200
+look at pluck okay I'm just going to
+
+1017
+00:58:03,200 --> 00:58:04,820
+comment this stuff out and what I'm
+
+1018
+00:58:04,820 --> 00:58:08,230
+going to do is create a lot of our
+
+1019
+00:58:08,230 --> 00:58:10,850
+consulates call this users this is just
+
+1020
+00:58:10,850 --> 00:58:15,260
+going to be an array of users and I'm
+
+1021
+00:58:15,260 --> 00:58:20,060
+just going to paste this in okay so we
+
+1022
+00:58:20,060 --> 00:58:22,040
+have these three users with a name and
+
+1023
+00:58:22,040 --> 00:58:25,400
+age so let's go ahead and create a user
+
+1024
+00:58:25,400 --> 00:58:38,090
+stream alright so pass in users and
+
+1025
+00:58:38,090 --> 00:58:51,960
+let's do users subscribe we'll say X
+
+1026
+00:58:51,960 --> 00:58:54,730
+okay so let's save that and that's just
+
+1027
+00:58:54,730 --> 00:58:56,620
+going to give us these users as a stream
+
+1028
+00:58:56,620 --> 00:59:00,220
+as an observable now let's say that we
+
+1029
+00:59:00,220 --> 00:59:03,490
+want to pluck out just the name okay we
+
+1030
+00:59:03,490 --> 00:59:05,350
+want to return just names so what we
+
+1031
+00:59:05,350 --> 00:59:10,150
+could do is just add on to this
+
+1032
+00:59:10,150 --> 00:59:14,260
+we'll say dot pluck and then we'll just
+
+1033
+00:59:14,260 --> 00:59:21,610
+pass in name okay save that and now it's
+
+1034
+00:59:21,610 --> 00:59:23,530
+just going to give us the names okay we
+
+1035
+00:59:23,530 --> 00:59:26,890
+could get any value we want if we want
+
+1036
+00:59:26,890 --> 00:59:31,920
+the ages we can do that as well
+
+1037
+00:59:31,920 --> 00:59:39,130
+all right so that is map and pluck all
+
+1038
+00:59:39,130 --> 00:59:40,810
+right so we're going to quickly look at
+
+1039
+00:59:40,810 --> 00:59:44,380
+merging concat now merge is it allows us
+
+1040
+00:59:44,380 --> 00:59:47,350
+to merge two are more observables and
+
+1041
+00:59:47,350 --> 00:59:49,660
+can cattle aoz us to concatenate them
+
+1042
+00:59:49,660 --> 00:59:52,150
+which means one right after another all
+
+1043
+00:59:52,150 --> 00:59:54,520
+right so let's start with merge now
+
+1044
+00:59:54,520 --> 00:59:58,600
+let's do our X dot observable and we're
+
+1045
+00:59:58,600 --> 01:00:00,460
+going to just use the of operator which
+
+1046
+01:00:00,460 --> 01:00:02,230
+just takes whatever you pass it and
+
+1047
+01:00:02,230 --> 01:00:04,240
+turns that into an observable so let's
+
+1048
+01:00:04,240 --> 01:00:09,850
+say hello all right and then let's
+
+1049
+01:00:09,850 --> 01:00:20,980
+subscribe to it okay console.log X and
+
+1050
+01:00:20,980 --> 01:00:25,270
+we need to go like that all right so
+
+1051
+01:00:25,270 --> 01:00:26,680
+let's go ahead and save that and that's
+
+1052
+01:00:26,680 --> 01:00:28,690
+just going to give us hello now let's
+
+1053
+01:00:28,690 --> 01:00:31,120
+say we want to merge another observable
+
+1054
+01:00:31,120 --> 01:00:33,430
+onto it so to do that we can say dot
+
+1055
+01:00:33,430 --> 01:00:38,040
+merge and in here we'll do our X dot
+
+1056
+01:00:38,040 --> 01:00:45,180
+observable dot of and put in every one
+
+1057
+01:00:45,180 --> 01:00:50,710
+okay so now let's save that and we now
+
+1058
+01:00:50,710 --> 01:00:56,950
+get observers the two together so let's
+
+1059
+01:00:56,950 --> 01:00:59,350
+take a look at another example using
+
+1060
+01:00:59,350 --> 01:01:03,900
+interval all right so let's do rx
+
+1061
+01:01:03,900 --> 01:01:09,510
+dot observable dot interval and we'll
+
+1062
+01:01:09,510 --> 01:01:20,279
+say two seconds take 25 and subscribe
+
+1063
+01:01:20,279 --> 01:01:22,140
+okay notice I'm doing at the shorthand
+
+1064
+01:01:22,140 --> 01:01:24,900
+way now because we are running out of
+
+1065
+01:01:24,900 --> 01:01:25,559
+time
+
+1066
+01:01:25,559 --> 01:01:28,680
+alright so in here let's do console dot
+
+1067
+01:01:28,680 --> 01:01:31,920
+log what i keep doing that i keep
+
+1068
+01:01:31,920 --> 01:01:35,670
+forgetting my arrows so console dot log
+
+1069
+01:01:35,670 --> 01:01:38,849
+x so we know what that's going to do
+
+1070
+01:01:38,849 --> 01:01:41,779
+it's going to start at zero and go to 24
+
+1071
+01:01:41,779 --> 01:01:45,660
+after every two seconds it'll emit okay
+
+1072
+01:01:45,660 --> 01:01:49,339
+so let's say that we want to merge in
+
+1073
+01:01:49,339 --> 01:01:54,829
+another interval so we'll say dot merge
+
+1074
+01:01:54,829 --> 01:02:01,140
+and our X dot observable dot interval
+
+1075
+01:02:01,140 --> 01:02:04,770
+and this time let's do it every half a
+
+1076
+01:02:04,770 --> 01:02:11,220
+second alright so now it's hard to tell
+
+1077
+01:02:11,220 --> 01:02:13,410
+which one is which but we have the one
+
+1078
+01:02:13,410 --> 01:02:15,450
+running every half a second which starts
+
+1079
+01:02:15,450 --> 01:02:18,480
+first and then it goes zero one two and
+
+1080
+01:02:18,480 --> 01:02:20,910
+then two seconds later this one starts
+
+1081
+01:02:20,910 --> 01:02:23,640
+at zero while this one's still going
+
+1082
+01:02:23,640 --> 01:02:26,400
+three four five six and then that runs
+
+1083
+01:02:26,400 --> 01:02:29,430
+again the two second one at one and it
+
+1084
+01:02:29,430 --> 01:02:30,839
+keeps going like that so we're having
+
+1085
+01:02:30,839 --> 01:02:32,910
+two of these run they're merged together
+
+1086
+01:02:32,910 --> 01:02:35,490
+they're running at the same time now
+
+1087
+01:02:35,490 --> 01:02:37,680
+there is a different and better syntax
+
+1088
+01:02:37,680 --> 01:02:39,900
+we could use with merge so let's take a
+
+1089
+01:02:39,900 --> 01:02:46,559
+look at that alright so let's say we
+
+1090
+01:02:46,559 --> 01:02:53,609
+have source will say source one and
+
+1091
+01:02:53,609 --> 01:02:58,609
+we'll set that to our X dot observable
+
+1092
+01:02:58,609 --> 01:03:05,640
+got interval every two seconds and let's
+
+1093
+01:03:05,640 --> 01:03:09,170
+do a map onto it okay so say map and
+
+1094
+01:03:09,170 --> 01:03:14,470
+we'll say V and
+
+1095
+01:03:14,470 --> 01:03:20,640
+we'll say merge one and then concatenate
+
+1096
+01:03:20,640 --> 01:03:24,789
+that V alright that way we'll be able to
+
+1097
+01:03:24,789 --> 01:03:29,010
+identify them so let's copy that and
+
+1098
+01:03:29,010 --> 01:03:34,089
+then right below it will do large - and
+
+1099
+01:03:34,089 --> 01:03:38,799
+this one will be every half a second all
+
+1100
+01:03:38,799 --> 01:03:42,880
+right we'll call this source - and then
+
+1101
+01:03:42,880 --> 01:03:45,599
+what we can do is we can say our X dot
+
+1102
+01:03:45,599 --> 01:03:52,799
+observable dot merge and we can pass in
+
+1103
+01:03:52,799 --> 01:04:01,839
+source one and source - alright and
+
+1104
+01:04:01,839 --> 01:04:10,390
+let's add dot take 25 and then we'll
+
+1105
+01:04:10,390 --> 01:04:25,269
+subscribe I keep doing that
+
+1106
+01:04:25,269 --> 01:04:28,809
+okay so let's go ahead and save that and
+
+1107
+01:04:28,809 --> 01:04:32,059
+now we'll see Marge two starts because
+
+1108
+01:04:32,059 --> 01:04:34,160
+it's every half second and then every
+
+1109
+01:04:34,160 --> 01:04:37,219
+two seconds merge once Marge one emits
+
+1110
+01:04:37,219 --> 01:04:40,519
+its value okay and this is a better way
+
+1111
+01:04:40,519 --> 01:04:42,380
+to do it we're creating the two sources
+
+1112
+01:04:42,380 --> 01:04:44,959
+then we're calling rx observable merge
+
+1113
+01:04:44,959 --> 01:04:48,979
+and passing in those sources okay so now
+
+1114
+01:04:48,979 --> 01:04:54,829
+let's take a look at concat now the
+
+1115
+01:04:54,829 --> 01:04:56,900
+difference between merge and concat is
+
+1116
+01:04:56,900 --> 01:04:58,900
+that concat will go one after another
+
+1117
+01:04:58,900 --> 01:05:01,160
+all right so what I'm going to do is
+
+1118
+01:05:01,160 --> 01:05:04,400
+just copy what we just did here I'm
+
+1119
+01:05:04,400 --> 01:05:09,200
+sorry right here all right and we're not
+
+1120
+01:05:09,200 --> 01:05:11,509
+going to do interval if we do that it's
+
+1121
+01:05:11,509 --> 01:05:13,579
+just going to go on forever so I think a
+
+1122
+01:05:13,579 --> 01:05:16,719
+better example would be to use range
+
+1123
+01:05:16,719 --> 01:05:21,999
+okay so we'll say range and let's do
+
+1124
+01:05:21,999 --> 01:05:29,529
+zero five all right and then the mapping
+
+1125
+01:05:29,529 --> 01:05:34,489
+will change that - we'll just say source
+
+1126
+01:05:34,489 --> 01:05:40,549
+1 and source 2 okay this one will also
+
+1127
+01:05:40,549 --> 01:05:45,219
+be range but this one we want to set to
+
+1128
+01:05:45,219 --> 01:05:51,559
+6 and we'll go to 11 all right no not to
+
+1129
+01:05:51,559 --> 01:05:55,789
+11 we want to go up 5 all right and then
+
+1130
+01:05:55,789 --> 01:05:57,349
+down here we're going to say rx
+
+1131
+01:05:57,349 --> 01:06:01,549
+observable dot can cat source one source
+
+1132
+01:06:01,549 --> 01:06:05,259
+2 and we're going to get rid of the take
+
+1133
+01:06:05,259 --> 01:06:08,239
+operator and let's see what that gives
+
+1134
+01:06:08,239 --> 01:06:13,369
+us all right so if we look it says
+
+1135
+01:06:13,369 --> 01:06:16,489
+source 1 it's going to go 0 and then 5
+
+1136
+01:06:16,489 --> 01:06:19,309
+up okay and then it concatenates this
+
+1137
+01:06:19,309 --> 01:06:23,180
+one which goes from 6 up 5 to 10 all
+
+1138
+01:06:23,180 --> 01:06:25,099
+right so it runs one after another while
+
+1139
+01:06:25,099 --> 01:06:27,039
+merge will run at the same exact time
+
+1140
+01:06:27,039 --> 01:06:28,880
+all right so that's the biggest
+
+1141
+01:06:28,880 --> 01:06:31,609
+difference between the two all right so
+
+1142
+01:06:31,609 --> 01:06:33,979
+that's merge and kin cat now let's take
+
+1143
+01:06:33,979 --> 01:06:36,859
+a look at merge map can cat map and
+
+1144
+01:06:36,859 --> 01:06:40,780
+switch map
+
+1145
+01:06:40,780 --> 01:06:42,800
+all right so now we're going to take a
+
+1146
+01:06:42,800 --> 01:06:45,410
+look at merge Maps which map and can cat
+
+1147
+01:06:45,410 --> 01:06:47,630
+map and what these do is they
+
+1148
+01:06:47,630 --> 01:06:49,850
+essentially stop us from having to
+
+1149
+01:06:49,850 --> 01:06:53,360
+subscribe to nest subscribes all right
+
+1150
+01:06:53,360 --> 01:06:54,980
+now if you remember back when we worked
+
+1151
+01:06:54,980 --> 01:06:58,460
+with the github example we did a double
+
+1152
+01:06:58,460 --> 01:07:01,130
+subscribe which we shouldn't do so let's
+
+1153
+01:07:01,130 --> 01:07:03,650
+take a look at what we shouldn't do
+
+1154
+01:07:03,650 --> 01:07:08,690
+alright so say our X dot observable dot
+
+1155
+01:07:08,690 --> 01:07:14,030
+of and let's just say hello all right
+
+1156
+01:07:14,030 --> 01:07:16,070
+and then we're going to subscribe to
+
+1157
+01:07:16,070 --> 01:07:21,520
+that and in the SUBSCRIBE we'll say V
+
+1158
+01:07:21,520 --> 01:07:29,170
+and then we'll do another observable
+
+1159
+01:07:29,170 --> 01:07:33,860
+okay observable dot of and then we want
+
+1160
+01:07:33,860 --> 01:07:36,500
+to use that value that V that's returned
+
+1161
+01:07:36,500 --> 01:07:39,590
+and we're going to just concatenate onto
+
+1162
+01:07:39,590 --> 01:07:41,350
+it
+
+1163
+01:07:41,350 --> 01:07:45,770
+everyone alright and then we subscribe
+
+1164
+01:07:45,770 --> 01:07:51,230
+to that okay so when we subscribe to it
+
+1165
+01:07:51,230 --> 01:07:56,230
+let's just do X and you'll say
+
+1166
+01:07:56,230 --> 01:08:00,230
+console.log X all right so you probably
+
+1167
+01:08:00,230 --> 01:08:02,660
+know what's going to happen or we're
+
+1168
+01:08:02,660 --> 01:08:05,420
+going to get hello everyone all right so
+
+1169
+01:08:05,420 --> 01:08:07,820
+this is something you may want to do you
+
+1170
+01:08:07,820 --> 01:08:09,230
+haven't observable and then you want to
+
+1171
+01:08:09,230 --> 01:08:11,300
+use that value that you get from the
+
+1172
+01:08:11,300 --> 01:08:14,030
+observable that data in another one and
+
+1173
+01:08:14,030 --> 01:08:16,460
+this isn't the right way to do it now it
+
+1174
+01:08:16,460 --> 01:08:18,410
+works in this situation but there's
+
+1175
+01:08:18,410 --> 01:08:20,120
+others where it's not going to work okay
+
+1176
+01:08:20,120 --> 01:08:22,100
+if you want to put this in a variable
+
+1177
+01:08:22,100 --> 01:08:24,470
+and reuse it in certain places you're
+
+1178
+01:08:24,470 --> 01:08:26,750
+going to have some problems alright so
+
+1179
+01:08:26,750 --> 01:08:29,450
+what we're going to do here is use merge
+
+1180
+01:08:29,450 --> 01:08:32,330
+map so let's do the same thing using
+
+1181
+01:08:32,330 --> 01:08:38,740
+merge map will say observable dot of
+
+1182
+01:08:38,740 --> 01:08:43,880
+hello all right and then what we want to
+
+1183
+01:08:43,880 --> 01:08:45,900
+do is say dot
+
+1184
+01:08:45,900 --> 01:08:50,099
+merge map and then in here we'll have
+
+1185
+01:08:50,099 --> 01:08:59,790
+we'll save V and return ok we want to
+
+1186
+01:08:59,790 --> 01:09:05,819
+return our X dot 0 lot of and in here
+
+1187
+01:09:05,819 --> 01:09:17,460
+we'll say V whoops everyone yeah that's
+
+1188
+01:09:17,460 --> 01:09:29,630
+right and then we'll subscribe to it
+
+1189
+01:09:29,630 --> 01:09:33,599
+alright so now we'll comment this one
+
+1190
+01:09:33,599 --> 01:09:38,759
+out and save and we should get the same
+
+1191
+01:09:38,759 --> 01:09:40,849
+thing hello everyone
+
+1192
+01:09:40,849 --> 01:09:43,440
+alright so this is the correct way to do
+
+1193
+01:09:43,440 --> 01:09:46,500
+it so now let's take a look at switch
+
+1194
+01:09:46,500 --> 01:09:49,170
+map which basically transforms the items
+
+1195
+01:09:49,170 --> 01:09:52,859
+that are emitted by an observable into
+
+1196
+01:09:52,859 --> 01:09:54,630
+observables and then flattens the
+
+1197
+01:09:54,630 --> 01:09:55,260
+emissions
+
+1198
+01:09:55,260 --> 01:09:57,389
+all right into a single observable now
+
+1199
+01:09:57,389 --> 01:10:00,719
+this used to be called flat map in rxjs
+
+1200
+01:10:00,719 --> 01:10:03,780
+4 ok which is now switch map so what I'm
+
+1201
+01:10:03,780 --> 01:10:04,949
+going to do is I'm going to use it on
+
+1202
+01:10:04,949 --> 01:10:07,440
+the github example that we did so I'm
+
+1203
+01:10:07,440 --> 01:10:09,420
+going to paste in that exact code and
+
+1204
+01:10:09,420 --> 01:10:12,719
+let me just comment this out ok I'm
+
+1205
+01:10:12,719 --> 01:10:14,460
+going to paste in that code and then
+
+1206
+01:10:14,460 --> 01:10:16,949
+we're going to basically clean it up a
+
+1207
+01:10:16,949 --> 01:10:19,860
+little all right so let's we have this
+
+1208
+01:10:19,860 --> 01:10:21,440
+get user that's going to stay the same
+
+1209
+01:10:21,440 --> 01:10:24,510
+but down here let's redo this to be a
+
+1210
+01:10:24,510 --> 01:10:28,260
+little bit more clean so let's take this
+
+1211
+01:10:28,260 --> 01:10:34,050
+right here and paste it down here and
+
+1212
+01:10:34,050 --> 01:10:35,400
+we'll work from that I'm going to make
+
+1213
+01:10:35,400 --> 01:10:39,719
+this a little wider okay so I want to
+
+1214
+01:10:39,719 --> 01:10:43,080
+add on to this now see how we're doing
+
+1215
+01:10:43,080 --> 01:10:45,929
+this get user and then a target value
+
+1216
+01:10:45,929 --> 01:10:50,310
+let's go ahead and map our value that's
+
+1217
+01:10:50,310 --> 01:10:53,429
+emitted to that so go ahead and say dot
+
+1218
+01:10:53,429 --> 01:10:54,210
+map
+
+1219
+01:10:54,210 --> 01:10:58,890
+II and then we'll set that to e dot
+
+1220
+01:10:58,890 --> 01:11:01,440
+target dot value so now we don't have to
+
+1221
+01:11:01,440 --> 01:11:04,560
+worry about the target dot value anymore
+
+1222
+01:11:04,560 --> 01:11:06,540
+it's going to be mapped to the actual
+
+1223
+01:11:06,540 --> 01:11:09,390
+emission all right so after that let's
+
+1224
+01:11:09,390 --> 01:11:15,960
+do dot switch map and in here we'll
+
+1225
+01:11:15,960 --> 01:11:22,770
+paste in our value then we're going to
+
+1226
+01:11:22,770 --> 01:11:24,360
+grab this
+
+1227
+01:11:24,360 --> 01:11:29,220
+it's from promise copy that and we have
+
+1228
+01:11:29,220 --> 01:11:31,290
+to return it so return and then we'll
+
+1229
+01:11:31,290 --> 01:11:34,440
+paste that in okay and then we can just
+
+1230
+01:11:34,440 --> 01:11:36,330
+use V right here because we already
+
+1231
+01:11:36,330 --> 01:11:42,350
+mapped it to the target value and then
+
+1232
+01:11:42,350 --> 01:11:45,570
+we can put a semicolon and then let's
+
+1233
+01:11:45,570 --> 01:11:56,370
+subscribe to it okay and I can actually
+
+1234
+01:11:56,370 --> 01:12:01,760
+copy what we have in this right here
+
+1235
+01:12:01,760 --> 01:12:04,440
+alright so let's go ahead and comment
+
+1236
+01:12:04,440 --> 01:12:08,570
+that out
+
+1237
+01:12:08,570 --> 01:12:14,610
+save it okay so now we'll go ahead and
+
+1238
+01:12:14,610 --> 01:12:20,340
+type and it works all right so this is a
+
+1239
+01:12:20,340 --> 01:12:23,790
+much better way to do it okay so this
+
+1240
+01:12:23,790 --> 01:12:26,310
+video went long as usual went longer
+
+1241
+01:12:26,310 --> 01:12:28,970
+than I had planned so sorry about that
+
+1242
+01:12:28,970 --> 01:12:31,980
+hopefully you learned at least the the
+
+1243
+01:12:31,980 --> 01:12:34,970
+gist of how reactive extensions works
+
+1244
+01:12:34,970 --> 01:12:38,100
+this was all very practical basic stuff
+
+1245
+01:12:38,100 --> 01:12:40,830
+we did I will be making a video in the
+
+1246
+01:12:40,830 --> 01:12:43,290
+future where we can actually build a
+
+1247
+01:12:43,290 --> 01:12:46,320
+working application using reactive
+
+1248
+01:12:46,320 --> 01:12:49,020
+extensions all right so thanks for
+
+1249
+01:12:49,020 --> 01:12:51,000
+hanging on this long and hopefully
+
+1250
+01:12:51,000 --> 01:12:53,580
+enjoyed it please subscribe leave a like
+
+1251
+01:12:53,580 --> 01:12:57,120
+leave a comment if you had any issues or
+
+1252
+01:12:57,120 --> 01:12:59,310
+whatever you can do is fine and I would
+
+1253
+01:12:59,310 --> 01:13:01,530
+suggest also checking out the edge wanax
+
+1254
+01:13:01,530 --> 01:13:03,720
+course alright thanks for watching I'll
+
+1255
+01:13:03,720 --> 01:13:06,440
+see you next time
+
