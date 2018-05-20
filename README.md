@@ -62,3 +62,15 @@ var obs1 = Rx.Observable.fromEvent('button', 'click');
 
 
 ```
+
+# RXJS_learn
+
+> 技术就像酿酒一样，是需要时间慢慢去喂的；
+
+# 其实 redux 的逻辑 与 前台与后台的数据交互差不多：
+
+* action 就是应用向reducer 发送的请求 : Actions are information payloads that send data from the application to the reducer 
+    + type 就是url 
+    + payload 就是 body
+
+* reducer
