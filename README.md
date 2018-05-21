@@ -14,7 +14,9 @@ video: https://www.youtube.com/playlist?list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi
 
 * reducer 就是后台处理程序，走的是存储这条线。其可以接收前台发送的请求(action), 也可以访问底层数据库 (state), 并将处理后的结果 存到数据库中(state)
 
-* store 也是后台处理程序，走的是接收与响应这条线。其接收 前台的 action (an observer of actions) , 并将 state 返回给前台 ( an RxJS observable of state)  
+* store 是前台的的地址栏（postman）。 通过store 去dispath 一个action。 也通过store 响应后台的state改变 (subscribe to observe and react to state changes )
+
+其接收 前台的 action (an observer of actions) , 并将 state 返回给前台 ( an RxJS observable of state)  
 
 
 
