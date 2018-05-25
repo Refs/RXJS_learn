@@ -4,7 +4,7 @@ video: https://www.youtube.com/playlist?list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi
 
 ## understanding
 
-> 其实 redux 的处理逻辑 与 前台与后台的交互逻辑差不多：按照下面这个逻辑来；
+> 其实 redux 的处理逻辑 与 前台与后台的交互逻辑差不多：按照下面这个逻辑来；即都是同一套体系；
 
 * action 就是应用向reducer 发送的请求 : Actions are information payloads that send data from the application to the reducer 
     + type 就是url 
@@ -12,7 +12,7 @@ video: https://www.youtube.com/playlist?list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi
 
 * state 就类似于mongodb数据库中的数据；
 
-* reducer 就是后台处理程序，走的是存储这条线。其可以接收前台发送的请求(action), 也可以访问底层数据库 (state), 并将处理后的结果 存到数据库中(state)
+* reducer (路由) 就是后台处理程序，走的是存储这条线。其可以接收前台发送的请求(action),  也可以访问底层数据库 (state), 并将处理后的结果 存到数据库中(state)
 
 * store 是前台的的地址栏（postman）。 通过store 去dispath 一个action。 也通过store 响应后台的state改变 (subscribe to observe and react to state changes )
 
